@@ -1,0 +1,49 @@
+{
+  "name": "urbanoe-communications",
+  "version": "1.0.0",
+  "description": "Contains interfaces and Redux constructs to query the Urbanoe platform.",
+  "main": "dist/index.js",
+  "scripts": {
+    "prebuild": "rimraf dist && mkdir dist",
+    "build": "babel src/ -d dist/ --copy-files --ignore __tests__",
+    "postbuild": "flow gen-flow-files ./src --out-dir ./dist",
+    "prepublish": "yarn run build",
+    "test": "node_modules/jest/bin/jest.js",
+    "testc": "node_modules/jest/bin/jest.js --coverage",
+    "testw": "node_modules/jest/bin/jest.js --watch"
+  },
+  "keywords": [
+    "urbanoe",
+    "communication",
+    "rest",
+    "redux"
+  ],
+  "author": "martin.beauvais@reacticity.com",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "axios-mock-adapter": "^1.12.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.1.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "^21.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "flow-bin": "^0.64.0",
+    "jest": "^22.1.4",
+    "redux-mock-store": "^1.5.1",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "babel-eslint": "^8.2.1",
+    "lodash": "^4.17.4",
+    "redux-thunk": "^2.2.0",
+    "urbanoe-model": "^1.0.0"
+  }
+}
