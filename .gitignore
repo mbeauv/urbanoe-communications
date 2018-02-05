@@ -1,6 +1,7 @@
 coverage/
 dist/
 node_modules/
+.scannerwork/
 docs/
 .expo/
 npm-debug.*
