@@ -1,0 +1,11 @@
+src
+docs
+coverage
+.babelrc
+.eslintrc
+.flowconfig
+.watchmanconfig
+.scannerwork
+jest.config.js
+yarn.lock
+sonar-project.properties
