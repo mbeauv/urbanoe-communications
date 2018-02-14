@@ -1,8 +1,12 @@
 {
   "name": "urbanoe-communications",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Contains interfaces and Redux constructs to query the Urbanoe platform.",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mbeauv/urbanoe-communications.git"
+  },
   "scripts": {
     "prebuild": "rimraf dist && mkdir dist",
     "build": "babel src/ -d dist/ --copy-files --ignore __tests__",
@@ -44,6 +48,6 @@
     "axios": "^0.17.1",
     "lodash": "^4.17.4",
     "redux-thunk": "^2.2.0",
-    "urbanoe-model": "^1.0.0"
+    "urbanoe-model": "^1.0.1"
   }
 }
