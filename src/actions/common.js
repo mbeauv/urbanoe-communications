@@ -6,5 +6,5 @@
  * To test remotely: 'https://www.urbanoe.com/mobile'
  */
 export function getRootUrl() {
-  return 'http://localhost:3000/mobile';
+  return 'https://www.urbanoe.com/mobile';
 }
