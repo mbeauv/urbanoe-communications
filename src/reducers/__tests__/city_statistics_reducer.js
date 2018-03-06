@@ -4,7 +4,6 @@ const EMPTY_STATE = {};
 const TEST_STATS_TYPE = 'pie';
 const TEST_CITY_ID = 5;
 const TEST_CHART = { datum1: 'data' };
-const TEST_CITY_PROFILE = [{ id: 23 }];
 const TEST_ERROR = { content: 'error' };
 
 describe('city_statistics_reducer', () => {
