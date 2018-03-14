@@ -21,6 +21,10 @@ const INITIAL_STATE: State = {
  */
 export function loginReducer(state: State = INITIAL_STATE, action: Action): State {
   switch (action.type) {
+    case 'LOGOUT_REQUEST':
+      return { ...state, loading: true, authInfo: null, error: null };
+    case 'LOGOUT_RESPONSE_OK':
+      return { ...state, loading: false, authInfo: null, error: null };
     case 'LOGIN_REQUEST':
       return { ...state, loading: true };
     case 'LOGIN_RESPONSE_OK':

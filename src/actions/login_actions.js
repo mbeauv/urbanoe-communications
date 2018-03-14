@@ -4,6 +4,17 @@ import { communicator } from './communicator';
 import type { ThunkAction } from './types';
 
 /**
+ * Returns an asynchronous action to logout of the platform.  At the present
+ * time, it does not actually make a call to the server, just clears the token.
+ */
+export function doLogout() : ThunkAction {
+  return async (dispatch) => {
+    dispatch({ type: 'LOGOUT_REQUEST' });
+    dispatch({ type: 'LOGOUT_RESPONSE_OK' });
+  };
+}
+
+/**
  * Returns an asynchronous action to login the platform.
  */
 export function doLogin(

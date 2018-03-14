@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { setCommunicatorInstance } from '../communicator';
-import { doLogin } from '../login_actions';
+import { doLogin, doLogout } from '../login_actions';
 
 const USER_ID = 24;
 const USER_NAME = 'jdoe';
@@ -15,6 +15,21 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('login_actions', () => {
+  describe('doLogout', () => {
+    it('handles logout', () => {
+      const expectedActions = [
+        { type: 'LOGOUT_REQUEST' },
+        { type: 'LOGOUT_RESPONSE_OK' },
+      ];
+
+      const store = mockStore({ todos: [] });
+
+      return store.dispatch(doLogout()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+  });
+
   describe('doLogin', () => {
     beforeEach(() => {
       setCommunicatorInstance(mock.axiosInstance);

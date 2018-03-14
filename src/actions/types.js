@@ -21,6 +21,8 @@ import type {
 export type Action =
     { type: 'LOGIN_REQUEST', userName: string, password: string }
   | { type: 'LOGIN_RESPONSE_OK', login: LoginInfo }
+  | { type: 'LOGOUT_REQUEST' }
+  | { type: 'LOGOUT_RESPONSE_OK' }
   | { type: 'LOGIN_RESPONSE_ERROR', error: Object }
   | { type: 'CITY_PROFILE_REQUEST', cityId: number }
   | { type: 'CITY_PROFILE_RESPONSE_OK', cityProfile: CityProfile }
