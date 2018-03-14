@@ -1,7 +1,6 @@
 // @flow
 
-import axios from 'axios';
-import { getRootUrl } from './common';
+import { communicator } from './communicator';
 import type { ThunkAction } from './types';
 
 /**
@@ -13,8 +12,8 @@ export function getCityStatistics(cityId: number, statsType: string): ThunkActio
     dispatch({ type: 'CITY_STATISTICS_REQUEST', cityId, statsType });
 
     try {
-      const url = `${getRootUrl()}/cities/${cityId}/statistics.json?type=${statsType}`;
-      const response = await axios.get(url, { 'Content-Type': 'application/json' });
+      const url = `/cities/${cityId}/statistics.json?type=${statsType}`;
+      const response = await communicator().get(url);
       dispatch({ type: 'CITY_STATISTICS_RESPONSE_OK', cityId, statsType, chart: response.data });
     } catch (error) {
       dispatch({ type: 'CITY_STATISTICS_RESPONSE_ERROR', cityId, statsType, error });

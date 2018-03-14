@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { getCityProfile } from '../city_profile_actions';
+import { setCommunicatorInstance } from '../communicator';
 
 const TEST_CITY_ID = 4;
 
@@ -12,13 +13,17 @@ const mockStore = configureMockStore(middlewares);
 
 describe('city_profile_actions', () => {
   describe('getCityProfile', () => {
+    beforeEach(() => {
+      setCommunicatorInstance(mock.axiosInstance);
+    });
+
     afterEach(() => {
       mock.reset();
       mock.restore();
     });
 
     it('handles successful fetch', () => {
-      mock.onGet('https://www.urbanoe.com/mobile/cities/4.json').reply(200, { id: 4 });
+      mock.onGet(`/cities/${TEST_CITY_ID}.json`).reply(200, { id: 4 });
 
       const expectedActions = [
         { type: 'CITY_PROFILE_REQUEST', cityId: TEST_CITY_ID },

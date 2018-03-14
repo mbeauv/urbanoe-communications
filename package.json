@@ -49,6 +49,6 @@
     "axios": "^0.17.1",
     "lodash": "^4.17.4",
     "redux-thunk": "^2.2.0",
-    "urbanoe-model": "^1.0.1"
+    "urbanoe-model": "^1.1.0"
   }
 }

@@ -2,6 +2,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import { setCommunicatorInstance } from '../communicator';
 import { getIssueDetails } from '../issue_details_actions';
 
 const TEST_ISSUE_ID = 4;
@@ -12,13 +13,17 @@ const mockStore = configureMockStore(middlewares);
 
 describe('issue_details_actions', () => {
   describe('getIssueDetails', () => {
+    beforeEach(() => {
+      setCommunicatorInstance(mock.axiosInstance);
+    });
+
     afterEach(() => {
       mock.reset();
       mock.restore();
     });
 
     it('handles successful fetch', () => {
-      mock.onGet('https://www.urbanoe.com/mobile/issues/4.json').reply(200, { id: 4 });
+      mock.onGet('/issues/4.json').reply(200, { id: 4 });
 
       const expectedActions = [
         { type: 'ISSUE_DETAILS_REQUEST', issueId: TEST_ISSUE_ID },

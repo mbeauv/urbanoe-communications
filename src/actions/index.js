@@ -6,4 +6,5 @@ export * from './city_profile_actions';
 export * from './city_statistics_actions';
 export * from './issue_details_actions';
 export * from './user_profile_actions';
+export * from './login_actions';
 export * from './types';

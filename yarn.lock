@@ -3728,11 +3728,9 @@ ultron@~1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ultron/-/ultron-1.1.1.tgz#9fe1536a10a664a65266a1e3ccf85fd36302bc9c"
 
-urbanoe-model@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/urbanoe-model/-/urbanoe-model-1.0.0.tgz#7b39be52e353c3541972bc46b67608c8fae6c5b9"
-  dependencies:
-    babel-eslint "^8.2.1"
+urbanoe-model@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/urbanoe-model/-/urbanoe-model-1.1.0.tgz#6028c425ab252c231388e24a184bdda507c55dee"
 
 user-home@^1.1.1:
   version "1.1.1"

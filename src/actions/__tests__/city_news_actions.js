@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { getCityNews } from '../city_news_actions';
+import { setCommunicatorInstance } from '../communicator';
 
 const TEST_CITY_ID = 4;
 const TEST_PAGE_ID = 2;
@@ -13,13 +14,17 @@ const mockStore = configureMockStore(middlewares);
 
 describe('city_news_actions', () => {
   describe('getCityNews', () => {
+    beforeEach(() => {
+      setCommunicatorInstance(mock.axiosInstance);
+    });
+
     afterEach(() => {
       mock.reset();
       mock.restore();
     });
 
     it('handles successful fetch', () => {
-      mock.onGet('https://www.urbanoe.com/mobile/activities.json?scope=for_city&city_id=4&page=2').reply(200, []);
+      mock.onGet(`/activities.json?scope=for_city&city_id=${TEST_CITY_ID}&page=2`).reply(200, []);
 
       const expectedActions = [
         { type: 'CITY_NEWS_PAGE_REQUEST', cityId: TEST_CITY_ID, pageId: TEST_PAGE_ID },

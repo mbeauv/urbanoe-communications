@@ -8,6 +8,7 @@ import type {
   CityIssuesFilterData,
   PieChartData,
   UserProfileData,
+  LoginInfo,
 } from 'urbanoe-model';
 
 /**
@@ -18,7 +19,10 @@ import type {
  * https://github.com/fbsamples/f8app/blob/master/js/actions/types.js
  */
 export type Action =
-    { type: 'CITY_PROFILE_REQUEST', cityId: number }
+    { type: 'LOGIN_REQUEST', userName: string, password: string }
+  | { type: 'LOGIN_RESPONSE_OK', login: LoginInfo }
+  | { type: 'LOGIN_RESPONSE_ERROR', error: Object }
+  | { type: 'CITY_PROFILE_REQUEST', cityId: number }
   | { type: 'CITY_PROFILE_RESPONSE_OK', cityProfile: CityProfile }
   | { type: 'CITY_PROFILE_RESPONSE_ERROR', error: Object }
   | { type: 'CITY_NEWS_PAGE_REQUEST', cityId: number, pageId: number }

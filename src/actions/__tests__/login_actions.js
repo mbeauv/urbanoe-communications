@@ -3,17 +3,19 @@ import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { setCommunicatorInstance } from '../communicator';
-import { getCityStatistics } from '../city_statistics_actions';
+import { doLogin } from '../login_actions';
 
-const TEST_CITY_ID = 4;
-const TEST_CITY_STATS_TYPE = 'pie';
+const USER_ID = 24;
+const USER_NAME = 'jdoe';
+const USER_PASSWORD = 'apassword';
+const TOKEN = 'atoken';
 
 const mock = new MockAdapter(axios);
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('city_statistics_actions', () => {
-  describe('getCityStatistics', () => {
+describe('login_actions', () => {
+  describe('doLogin', () => {
     beforeEach(() => {
       setCommunicatorInstance(mock.axiosInstance);
     });
@@ -23,17 +25,19 @@ describe('city_statistics_actions', () => {
       mock.restore();
     });
 
-    it('handles successful fetch', () => {
-      mock.onGet(`/cities/${TEST_CITY_ID}/statistics.json?type=pie`).reply(200, { id: 4 });
+
+    it('handles successful login', () => {
+      mock.onPost('/sessions.json', { end_user: { username: USER_NAME, password: USER_PASSWORD } })
+        .reply(200, { auth_token: TOKEN, end_user_id: USER_ID });
 
       const expectedActions = [
-        { type: 'CITY_STATISTICS_REQUEST', cityId: TEST_CITY_ID, statsType: TEST_CITY_STATS_TYPE },
-        { type: 'CITY_STATISTICS_RESPONSE_OK', chart: { id: TEST_CITY_ID }, cityId: TEST_CITY_ID, statsType: 'pie' },
+        { type: 'LOGIN_REQUEST', userName: USER_NAME, password: USER_PASSWORD },
+        { type: 'LOGIN_RESPONSE_OK', login: { authToken: TOKEN, endUserId: USER_ID } },
       ];
 
       const store = mockStore({ todos: [] });
 
-      return store.dispatch(getCityStatistics(TEST_CITY_ID, TEST_CITY_STATS_TYPE)).then(() => {
+      return store.dispatch(doLogin(USER_NAME, USER_PASSWORD)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });

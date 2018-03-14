@@ -2,6 +2,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import { setCommunicatorInstance } from '../communicator';
 import { getSelectedUserProfile } from '../user_profile_actions';
 
 const TEST_USER_ID = 4;
@@ -12,13 +13,17 @@ const mockStore = configureMockStore(middlewares);
 
 describe('user_profile_actions', () => {
   describe('getSelectedUserProfile', () => {
+    beforeEach(() => {
+      setCommunicatorInstance(mock.axiosInstance);
+    });
+
     afterEach(() => {
       mock.reset();
       mock.restore();
     });
 
     it('handles successful fetch', () => {
-      mock.onGet('https://www.urbanoe.com/mobile/end_users/4.json').reply(200, { id: 4 });
+      mock.onGet(`/end_users/${TEST_USER_ID}.json`).reply(200, { id: 4 });
 
       const expectedActions = [
         { type: 'SELECTED_USER_PROFILE_REQUEST', userId: TEST_USER_ID },

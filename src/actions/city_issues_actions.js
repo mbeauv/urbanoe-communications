@@ -1,9 +1,8 @@
 // @flow
 
-import axios from 'axios';
 import _ from 'lodash';
 import type { CityIssuesFilterData } from 'urbanoe-model';
-import { getRootUrl } from './common';
+import { communicator } from './communicator';
 import type { ThunkAction } from './types';
 
 function constructStatusFilter(filter: CityIssuesFilterData) {
@@ -35,8 +34,8 @@ export function getCityIssuesNextPage(
 
     try {
       constructTypesFilter(filter);
-      const url = `${getRootUrl()}/cities/${cityId}/issues.json?page=${pageId}${constructFilterString(filter)}`;
-      const response = await axios.get(url, { 'Content-Type': 'application/json' });
+      const url = `cities/${cityId}/issues.json?page=${pageId}${constructFilterString(filter)}`;
+      const response = await communicator().get(url);
       dispatch({ type: 'CITY_ISSUES_NEXT_PAGE_RESPONSE_OK', cityIssues: response.data, pageId });
     } catch (error) {
       dispatch({ type: 'CITY_ISSUES_NEXT_PAGE_RESPONSE_ERROR', error, pageId });
@@ -55,8 +54,8 @@ export function getCityIssuesFirstPage(
     dispatch({ type: 'CITY_ISSUES_FIRST_PAGE_REQUEST', cityId, filter });
 
     try {
-      const url = `${getRootUrl()}/cities/${cityId}/issues.json?page=1${constructFilterString(filter)}`;
-      const response = await axios.get(url, { 'Content-Type': 'application/json' });
+      const url = `cities/${cityId}/issues.json?page=1${constructFilterString(filter)}`;
+      const response = await communicator().get(url);
       dispatch({ type: 'CITY_ISSUES_FIRST_PAGE_RESPONSE_OK', cityIssues: response.data });
     } catch (error) {
       dispatch({ type: 'CITY_ISSUES_FIRST_PAGE_RESPONSE_ERROR', error });

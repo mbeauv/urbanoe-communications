@@ -1,7 +1,6 @@
 // @flow
 
-import axios from 'axios';
-import { getRootUrl } from './common';
+import { communicator } from './communicator';
 import type { ThunkAction } from './types';
 
 /**
@@ -12,8 +11,8 @@ export function getSelectedUserProfile(userId: number): ThunkAction {
     dispatch({ type: 'SELECTED_USER_PROFILE_REQUEST', userId });
 
     try {
-      const url = `${getRootUrl()}/end_users/${userId}.json`;
-      const response = await axios.get(url, { 'Content-Type': 'application/json' });
+      const url = `end_users/${userId}.json`;
+      const response = await communicator().get(url);
       dispatch({ type: 'SELECTED_USER_PROFILE_RESPONSE_OK', userId, userProfile: response.data });
     } catch (error) {
       dispatch({ type: 'SELECTED_USER_PROFILE_RESPONSE_ERROR', userId, error });

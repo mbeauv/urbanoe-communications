@@ -1,7 +1,6 @@
 // @flow
 
-import axios from 'axios';
-import { getRootUrl } from './common';
+import { communicator } from './communicator';
 import type { ThunkAction } from './types';
 
 /**
@@ -12,8 +11,8 @@ export function getIssueDetails(issueId: number): ThunkAction {
     dispatch({ type: 'ISSUE_DETAILS_REQUEST', issueId });
 
     try {
-      const url = `${getRootUrl()}/issues/${issueId}.json`;
-      const response = await axios.get(url, { 'Content-Type': 'application/json' });
+      const url = `/issues/${issueId}.json`;
+      const response = await communicator().get(url);
       dispatch({ type: 'ISSUE_DETAILS_RESPONSE_OK', issueId, issueDetails: response.data });
     } catch (error) {
       dispatch({ type: 'ISSUE_DETAILS_RESPONSE_ERROR', issueId, error });
