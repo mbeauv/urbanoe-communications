@@ -10,6 +10,7 @@ import type {
   UserProfileData,
   LoginInfo,
   ImageGalleryInfo,
+  ImageGalleryDetails,
 } from 'urbanoe-model';
 
 /**
@@ -40,9 +41,12 @@ export type Action =
   | { type: 'CITY_STATISTICS_REQUEST', cityId: number, statsType: string }
   | { type: 'CITY_STATISTICS_RESPONSE_OK', cityId: number, statsType: string, chart: PieChartData }
   | { type: 'CITY_STATISTICS_RESPONSE_ERROR', cityId: number, statsType: string, error: Object }
-  | { type: 'IMAGE_GALLERY_LIST_REQUEST', authToken: string }
+  | { type: 'IMAGE_GALLERY_LIST_REQUEST' }
   | { type: 'IMAGE_GALLERY_LIST_RESPONSE_OK', galleries: Array<ImageGalleryInfo> }
   | { type: 'IMAGE_GALLERY_LIST_RESPONSE_ERROR', error: Object }
+  | { type: 'IMAGE_GALLERY_SELECTION_REQUEST', galleryId: number }
+  | { type: 'IMAGE_GALLERY_SELECTION_RESPONSE_OK', gallery: ImageGalleryDetails }
+  | { type: 'IMAGE_GALLERY_SELECTION_RESPONSE_ERROR', error: Object}
   | { type: 'ISSUE_DETAILS_REQUEST', issueId: number }
   | { type: 'ISSUE_DETAILS_RESPONSE_OK', issueId: number, issueDetails: IssueDetailsData }
   | { type: 'ISSUE_DETAILS_RESPONSE_ERROR', issueId: number, error: Object }
