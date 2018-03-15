@@ -41,6 +41,12 @@ export type Action =
   | { type: 'CITY_STATISTICS_REQUEST', cityId: number, statsType: string }
   | { type: 'CITY_STATISTICS_RESPONSE_OK', cityId: number, statsType: string, chart: PieChartData }
   | { type: 'CITY_STATISTICS_RESPONSE_ERROR', cityId: number, statsType: string, error: Object }
+  | { type: 'IMAGE_GALLERY_CREATE_REQUEST', galleryName: string }
+  | { type: 'IMAGE_GALLERY_CREATE_RESPONSE_OK', gallery: ImageGalleryDetails }
+  | { type: 'IMAGE_GALLERY_CREATE_RESPONSE_ERROR', error: Object }
+  | { type: 'IMAGE_GALLERY_DELETE_REQUEST' }
+  | { type: 'IMAGE_GALLERY_DELETE_RESPONSE_OK', galleryId: number }
+  | { type: 'IMAGE_GALLERY_DELETE_RESPONSE_ERROR', error: Object }
   | { type: 'IMAGE_GALLERY_LIST_REQUEST' }
   | { type: 'IMAGE_GALLERY_LIST_RESPONSE_OK', galleries: Array<ImageGalleryInfo> }
   | { type: 'IMAGE_GALLERY_LIST_RESPONSE_ERROR', error: Object }

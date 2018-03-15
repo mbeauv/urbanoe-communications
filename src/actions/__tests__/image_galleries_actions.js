@@ -3,13 +3,20 @@ import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { setCommunicatorInstance } from '../communicator';
-import { getImageGalleries, getImageGallery } from '../image_galleries_actions';
+import {
+  getImageGalleries,
+  getImageGallery,
+  createImageGallery,
+  deleteImageGallery,
+} from '../image_galleries_actions';
 
 const AUTH_TOKEN = 'atoken';
 const GALLERY1_ID = 5;
+const GALLERY1_NAME = 'jdoe_gallery';
 const GALLERY2_ID = 6;
-const GALLERY1 = { id: GALLERY1_ID, name: 'jdoe_gallery', nbImages: 1, createdAt: '123' };
-const GALLERY2 = { id: GALLERY2_ID, name: 'jdoe_gallery22', nbImages: 0, createdAt: '123' };
+const GALLERY2_NAME = 'jdoe_gallery22';
+const GALLERY1 = { id: GALLERY1_ID, name: GALLERY1_NAME, nbImages: 1, createdAt: '123' };
+const GALLERY2 = { id: GALLERY2_ID, name: GALLERY2_NAME, nbImages: 0, createdAt: '123' };
 const GALLERIES = [GALLERY1, GALLERY2];
 
 const mock = new MockAdapter(axios);
@@ -23,6 +30,43 @@ describe('image_galleries_actions', () => {
 
   afterEach(() => {
     mock.reset();
+  });
+
+  describe('deleteImageGallery', () => {
+    it('handles successful deletion', () => {
+      mock.onDelete(`/media_gallery/galleries/${GALLERY1_ID}.json?authToken=${AUTH_TOKEN}`).reply(200);
+    });
+
+    const expectedActions = [
+      { type: 'IMAGE_GALLERY_DELETE_REQUEST', galleryID: GALLERY1_ID },
+      { type: 'IMAGE_GALLERY_DELETE_RESPONSE_OK' },
+    ];
+
+    const store = mockStore({ todos: [] });
+
+    return store.dispatch(deleteImageGallery(AUTH_TOKEN, GALLERY1_ID)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('createImageGallery', () => {
+    it('handles successful creation', () => {
+      mock.onPost(`/media_gallery/galleries.json?authToken=${AUTH_TOKEN}`, {
+        name: GALLERY1_NAME
+      }).reply(200, GALLERY1);
+
+
+      const expectedActions = [
+        { type: 'IMAGE_GALLERY_CREATE_REQUEST', galleryName: GALLERY1_NAME },
+        { type: 'IMAGE_GALLERY_CREATE_RESPONSE_OK', gallery: GALLERY1 },
+      ];
+
+      const store = mockStore({ todos: [] });
+
+      return store.dispatch(createImageGallery(AUTH_TOKEN, GALLERY1_NAME)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
   });
 
   describe('getImageGallery', () => {
