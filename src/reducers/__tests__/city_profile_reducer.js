@@ -15,7 +15,7 @@ describe('city_news_reducer', () => {
     expect(cityProfileReducer(undefined, {})).toEqual(EMPTY_STATE);
   });
 
-  it('processes CITY_PROFILE_REQUEST success path', () => {
+  it('processes CITY_PROFILE_REQUEST', () => {
     expect(cityProfileReducer(
       EMPTY_STATE,
       { type: 'CITY_PROFILE_REQUEST', cityId: TEST_CITY_ID },
@@ -26,7 +26,7 @@ describe('city_news_reducer', () => {
     });
   });
 
-  it('processes CITY_PROFILE_RESPONSE_OK success path', () => {
+  it('processes CITY_PROFILE_RESPONSE_OK', () => {
     const state = { ...EMPTY_STATE, cityProfile: { id: 121 } };
     expect(cityProfileReducer(
       state,
@@ -38,7 +38,7 @@ describe('city_news_reducer', () => {
     });
   });
 
-  it('processes CITY_PROFILE_RESPONSE_ERROR success path', () => {
+  it('processes CITY_PROFILE_RESPONSE_ERROR', () => {
     const state = { ...EMPTY_STATE, cityProfile: { id: 121 } };
     expect(cityProfileReducer(
       state,

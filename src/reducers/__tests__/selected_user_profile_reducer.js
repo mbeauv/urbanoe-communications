@@ -15,7 +15,7 @@ describe('selected_user_profile_reducer', () => {
     expect(selectedUserProfileReducer(undefined, {})).toEqual(EMPTY_STATE);
   });
 
-  it('processes SELECTED_USER_PROFILE_REQUEST success path', () => {
+  it('processes SELECTED_USER_PROFILE_REQUEST', () => {
     expect(selectedUserProfileReducer(
       EMPTY_STATE,
       { type: 'SELECTED_USER_PROFILE_REQUEST', userId: TEST_USER_ID },
@@ -26,7 +26,7 @@ describe('selected_user_profile_reducer', () => {
     });
   });
 
-  it('processes SELECTED_USER_PROFILE_RESPONSE_OK success path', () => {
+  it('processes SELECTED_USER_PROFILE_RESPONSE_OK', () => {
     expect(selectedUserProfileReducer(
       EMPTY_STATE,
       { type: 'SELECTED_USER_PROFILE_RESPONSE_OK', userProfile: TEST_USER_PROFILE },
@@ -37,7 +37,7 @@ describe('selected_user_profile_reducer', () => {
     });
   });
 
-  it('processes SELECTED_USER_PROFILE_RESPONSE_ERROR success path', () => {
+  it('processes SELECTED_USER_PROFILE_RESPONSE_ERROR', () => {
     expect(selectedUserProfileReducer(
       EMPTY_STATE,
       { type: 'SELECTED_USER_PROFILE_RESPONSE_ERROR', error: TEST_ERROR },

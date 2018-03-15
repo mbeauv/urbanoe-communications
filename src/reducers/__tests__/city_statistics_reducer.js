@@ -16,14 +16,14 @@ describe('city_statistics_reducer', () => {
     expect(cityStatisticsReducer(undefined, {})).toEqual(EMPTY_STATE);
   });
 
-  it('processes CITY_STATISTICS_REQUEST success path', () => {
+  it('processes CITY_STATISTICS_REQUEST', () => {
     expect(cityStatisticsReducer(
       EMPTY_STATE,
       { type: 'CITY_STATISTICS_REQUEST', cityId: TEST_CITY_ID, statsType: TEST_STATS_TYPE },
     )).toEqual({ pie: { loading: true } });
   });
 
-  it('processes CITY_STATISTICS_RESPONSE_OK success path', () => {
+  it('processes CITY_STATISTICS_RESPONSE_OK', () => {
     expect(cityStatisticsReducer(
       EMPTY_STATE,
       { type: 'CITY_STATISTICS_RESPONSE_OK', cityId: TEST_CITY_ID, statsType: 'pie', chart: TEST_CHART },
@@ -37,7 +37,7 @@ describe('city_statistics_reducer', () => {
     });
   });
 
-  it('processes CITY_STATISTICS_RESPONSE_ERROR success path', () => {
+  it('processes CITY_STATISTICS_RESPONSE_ERROR', () => {
     expect(cityStatisticsReducer(
       EMPTY_STATE,
       { type: 'CITY_STATISTICS_RESPONSE_ERROR', cityId: 23, statsType: 'slice', error: TEST_ERROR },

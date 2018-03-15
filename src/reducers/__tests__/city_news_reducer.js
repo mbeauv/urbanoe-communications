@@ -15,7 +15,7 @@ describe('city_news_reducer', () => {
     expect(cityNewsReducer(undefined, {})).toEqual(EMPTY_STATE);
   });
 
-  it('processes CITY_NEWS_PAGE_REQUEST success path', () => {
+  it('processes CITY_NEWS_PAGE_REQUEST', () => {
     expect(cityNewsReducer(
       EMPTY_STATE,
       { type: 'CITY_NEWS_PAGE_REQUEST', cityId: TEST_CITY_ID, pageId: 2 },
@@ -27,7 +27,7 @@ describe('city_news_reducer', () => {
     });
   });
 
-  it('processes CITY_NEWS_PAGE_RESPONSE_OK success path', () => {
+  it('processes CITY_NEWS_PAGE_RESPONSE_OK', () => {
     const state = { ...EMPTY_STATE, cityNews: [{ id: 10 }] };
     expect(cityNewsReducer(
       state,
@@ -40,7 +40,7 @@ describe('city_news_reducer', () => {
     });
   });
 
-  it('processes CITY_NEWS_PAGE_RESPONSE_ERROR success path', () => {
+  it('processes CITY_NEWS_PAGE_RESPONSE_ERROR', () => {
     const state = { ...EMPTY_STATE, cityNews: [{ id: 10 }] };
     expect(cityNewsReducer(
       state,
