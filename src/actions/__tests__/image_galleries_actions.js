@@ -52,7 +52,7 @@ describe('image_galleries_actions', () => {
   describe('createImageGallery', () => {
     it('handles successful creation', () => {
       mock.onPost(`/media_gallery/galleries.json?authToken=${AUTH_TOKEN}`, {
-        name: GALLERY1_NAME
+        name: GALLERY1_NAME,
       }).reply(200, GALLERY1);
 
 
