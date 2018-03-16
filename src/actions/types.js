@@ -11,6 +11,7 @@ import type {
   LoginInfo,
   ImageGalleryInfo,
   ImageGalleryDetails,
+  ImageGalleryImageInfo,
 } from 'urbanoe-model';
 
 /**
@@ -53,6 +54,18 @@ export type Action =
   | { type: 'IMAGE_GALLERY_SELECTION_REQUEST', galleryId: number }
   | { type: 'IMAGE_GALLERY_SELECTION_RESPONSE_OK', gallery: ImageGalleryDetails }
   | { type: 'IMAGE_GALLERY_SELECTION_RESPONSE_ERROR', error: Object}
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_REQUEST', fileName: string }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_REQUEST_RESPONSE_OK', imageInfo: ImageGalleryImageInfo }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_ERROR', error: Object }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_DELETE_REQUEST', galleryId: number, imageInfoId: number }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_DELETE_RESPONSE_OK', galleryId: number, imageInfoId: number }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_DELETE_RESPONSE_ERROR', galleryId: number, imageInfoId: number, error: Object }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_REQUEST', imageInfoId: number }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_RESPONSE_OK', imageInfo: ImageGalleryImageInfo }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_RESPONSE_ERROR', error: Object}
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_REQUEST' }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_RESPONSE_OK', imageInfos: Array<ImageGalleryImageInfo> }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_RESPONSE_ERROR', error: Object }
   | { type: 'ISSUE_DETAILS_REQUEST', issueId: number }
   | { type: 'ISSUE_DETAILS_RESPONSE_OK', issueId: number, issueDetails: IssueDetailsData }
   | { type: 'ISSUE_DETAILS_RESPONSE_ERROR', issueId: number, error: Object }

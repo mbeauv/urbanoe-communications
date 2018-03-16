@@ -30,7 +30,7 @@ export function getCityIssuesNextPage(
   pageId: number,
 ): ThunkAction {
   return async (dispatch) => {
-    dispatch({ type: 'CITY_ISSUES_NEXT_PAGE_REQUEST', cityId, pageId });
+    dispatch({ type: 'CITY_ISSUES_NEXT_PAGE_REQUEST', cityId, pageId, filter });
 
     try {
       constructTypesFilter(filter);

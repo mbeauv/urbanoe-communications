@@ -12,16 +12,15 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('issue_details_actions', () => {
+  beforeEach(() => {
+    setCommunicatorInstance(mock.axiosInstance);
+  });
+
+  afterEach(() => {
+    mock.reset();
+  });
+
   describe('getIssueDetails', () => {
-    beforeEach(() => {
-      setCommunicatorInstance(mock.axiosInstance);
-    });
-
-    afterEach(() => {
-      mock.reset();
-      mock.restore();
-    });
-
     it('handles successful fetch', () => {
       mock.onGet('/issues/4.json').reply(200, { id: 4 });
 

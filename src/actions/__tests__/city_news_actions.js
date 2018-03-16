@@ -13,16 +13,15 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('city_news_actions', () => {
+  beforeEach(() => {
+    setCommunicatorInstance(mock.axiosInstance);
+  });
+
+  afterEach(() => {
+    mock.reset();
+  });
+
   describe('getCityNews', () => {
-    beforeEach(() => {
-      setCommunicatorInstance(mock.axiosInstance);
-    });
-
-    afterEach(() => {
-      mock.reset();
-      mock.restore();
-    });
-
     it('handles successful fetch', () => {
       mock.onGet(`/activities.json?scope=for_city&city_id=${TEST_CITY_ID}&page=2`).reply(200, []);
 

@@ -15,6 +15,14 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('login_actions', () => {
+  beforeEach(() => {
+    setCommunicatorInstance(mock.axiosInstance);
+  });
+
+  afterEach(() => {
+    mock.reset();
+  });
+  
   describe('doLogout', () => {
     it('handles logout', () => {
       const expectedActions = [
@@ -31,16 +39,6 @@ describe('login_actions', () => {
   });
 
   describe('doLogin', () => {
-    beforeEach(() => {
-      setCommunicatorInstance(mock.axiosInstance);
-    });
-
-    afterEach(() => {
-      mock.reset();
-      mock.restore();
-    });
-
-
     it('handles successful login', () => {
       mock.onPost('/sessions.json', { end_user: { username: USER_NAME, password: USER_PASSWORD } })
         .reply(200, { auth_token: TOKEN, end_user_id: USER_ID });

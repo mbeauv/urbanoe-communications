@@ -11,6 +11,21 @@ export function getRootUrl() {
   return 'https://www.urbanoe.com/mobile';
 }
 
+/**
+ * Returns a valid URL to access the media gallery.
+ */
+export function mgUrl(part: string) {
+  return `media_gallery/galleries${part}`;
+}
+
+/**
+ * Returns a valid URL to access the media gallery with an authToken.
+ */
+export function authMgUrl(part: string, authToken: string) {
+  return mgUrl(`${part}?authToken=${authToken}`);
+}
+
+
 let axiosInstance = axios.create({
   baseURL: getRootUrl(),
   timeout: 1000,
