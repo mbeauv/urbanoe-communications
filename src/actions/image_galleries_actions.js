@@ -6,13 +6,20 @@ import type { ThunkAction } from './types';
 /**
  * Creates an asynchronous action to create a new image gallery.
  */
-export function createImageGallery(authToken: string, galleryName: string): ThunkAction {
+export function createImageGallery(
+  authToken: string,
+  galleryName: string,
+  galleryDescription: string,
+): ThunkAction {
   return async (dispatch) => {
-    dispatch({ type: 'IMAGE_GALLERY_CREATE_REQUEST', galleryName });
+    dispatch({ type: 'IMAGE_GALLERY_CREATE_REQUEST', galleryName, galleryDescription });
 
     try {
       const url = authMgUrl('.json', authToken);
-      const response = await communicator().post(url, { name: galleryName });
+      const response = await communicator().post(url, {
+        name: galleryName,
+        description: galleryDescription,
+      });
       dispatch({ type: 'IMAGE_GALLERY_CREATE_RESPONSE_OK', gallery: response.data });
     } catch (error) {
       dispatch({ type: 'IMAGE_GALLERY_CREATE_RESPONSE_ERROR', error });

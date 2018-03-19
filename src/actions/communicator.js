@@ -8,7 +8,7 @@ import axios from 'axios';
  * To test remotely: 'https://www.urbanoe.com/mobile'
  */
 export function getRootUrl() {
-  return 'https://www.urbanoe.com/mobile';
+  return 'http://localhost:3000/mobile';
 }
 
 /**
@@ -22,7 +22,7 @@ export function mgUrl(part: string) {
  * Returns a valid URL to access the media gallery with an authToken.
  */
 export function authMgUrl(part: string, authToken: string) {
-  return mgUrl(`${part}?authToken=${authToken}`);
+  return mgUrl(`${part}?auth_token=${authToken}`);
 }
 
 

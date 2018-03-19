@@ -24,7 +24,7 @@ describe('image_info_actions', () => {
 
   describe('getImageInfo', () => {
     it('handles successful get of ImageInfo', () => {
-      mock.onGet(`/media_gallery/galleries/${GALLERY1_ID}/image_infos/${IMAGE_INFO_ID1}.json?authToken=${AUTH_TOKEN}`).reply(200, IMAGE_INFO1);
+      mock.onGet(`/media_gallery/galleries/${GALLERY1_ID}/image_infos/${IMAGE_INFO_ID1}.json?auth_token=${AUTH_TOKEN}`).reply(200, IMAGE_INFO1);
 
       const expectedActions = [
         { type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_REQUEST', galleryId: GALLERY1_ID, imageInfoId: IMAGE_INFO_ID1 },
@@ -41,7 +41,7 @@ describe('image_info_actions', () => {
 
   describe('getImageInfos', () => {
     it('handles successful get all of image infos', () => {
-      mock.onGet(`/media_gallery/galleries/${GALLERY1_ID}/image_infos.json?authToken=${AUTH_TOKEN}`).reply(200, [IMAGE_INFO1]);
+      mock.onGet(`/media_gallery/galleries/${GALLERY1_ID}/image_infos.json?auth_token=${AUTH_TOKEN}`).reply(200, [IMAGE_INFO1]);
 
       const expectedActions = [
         { type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_REQUEST' },
@@ -58,7 +58,7 @@ describe('image_info_actions', () => {
 
   describe('deleteImageInfo', () => {
     it('handles successful delete of an image info', () => {
-      mock.onDelete(`/media_gallery/galleries/${GALLERY1_ID}/image_infos/${IMAGE_INFO_ID1}.json?authToken=${AUTH_TOKEN}`).reply(200);
+      mock.onDelete(`/media_gallery/galleries/${GALLERY1_ID}/image_infos/${IMAGE_INFO_ID1}.json?auth_token=${AUTH_TOKEN}`).reply(200);
 
       const expectedActions = [
         { type: 'IMAGE_GALLERY_IMAGE_INFO_DELETE_REQUEST', galleryId: GALLERY1_ID, imageInfoId: IMAGE_INFO_ID1 },

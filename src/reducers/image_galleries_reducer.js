@@ -16,6 +16,8 @@ const INITIAL_STATE : State = {
 
 export function imageGalleriesReducer(state: State = INITIAL_STATE, action: Action): State {
   switch (action.type) {
+    case 'IMAGE_GALLERY_CREATE_RESPONSE_OK':
+      return { ...state, galleries: [...state.galleries, action.gallery] };
     case 'IMAGE_GALLERY_LIST_REQUEST':
       return { ...state, loading: true, galleries: [] };
     case 'IMAGE_GALLERY_LIST_RESPONSE_OK':
