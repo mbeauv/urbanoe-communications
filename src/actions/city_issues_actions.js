@@ -1,8 +1,9 @@
 // @flow
 
 import _ from 'lodash';
+import { Map } from 'immutable';
 import type { CityIssuesFilterData } from 'urbanoe-model';
-import { communicator } from './communicator';
+import { communicator, url } from '../common';
 import type { ThunkAction } from './types';
 
 function constructStatusFilter(filter: CityIssuesFilterData) {
@@ -17,8 +18,12 @@ function constructTypesFilter(filter: CityIssuesFilterData) {
   return _.keys(_.pickBy(filter.types, value => value)).toString();
 }
 
-function constructFilterString(filter: CityIssuesFilterData) {
-  return `&status=${constructStatusFilter(filter)}&issue_types=${constructTypesFilter(filter)}`;
+function constructFilterMap(pageId: number, filter: CityIssuesFilterData) {
+  return Map({
+    page: pageId,
+    status: constructStatusFilter(filter),
+    issue_types: constructTypesFilter(filter),
+  });
 }
 
 /**
@@ -33,9 +38,8 @@ export function getCityIssuesNextPage(
     dispatch({ type: 'CITY_ISSUES_NEXT_PAGE_REQUEST', cityId, pageId, filter });
 
     try {
-      constructTypesFilter(filter);
-      const url = `cities/${cityId}/issues.json?page=${pageId}${constructFilterString(filter)}`;
-      const response = await communicator().get(url);
+      const cityUrl = url(`cities/${cityId}/issues.json`, constructFilterMap(pageId, filter));
+      const response = await communicator().get(cityUrl);
       dispatch({ type: 'CITY_ISSUES_NEXT_PAGE_RESPONSE_OK', cityIssues: response.data, pageId });
     } catch (error) {
       dispatch({ type: 'CITY_ISSUES_NEXT_PAGE_RESPONSE_ERROR', error, pageId });
@@ -54,8 +58,8 @@ export function getCityIssuesFirstPage(
     dispatch({ type: 'CITY_ISSUES_FIRST_PAGE_REQUEST', cityId, filter });
 
     try {
-      const url = `cities/${cityId}/issues.json?page=1${constructFilterString(filter)}`;
-      const response = await communicator().get(url);
+      const cityUrl = url(`cities/${cityId}/issues.json`, constructFilterMap(1, filter));
+      const response = await communicator().get(cityUrl);
       dispatch({ type: 'CITY_ISSUES_FIRST_PAGE_RESPONSE_OK', cityIssues: response.data });
     } catch (error) {
       dispatch({ type: 'CITY_ISSUES_FIRST_PAGE_RESPONSE_ERROR', error });

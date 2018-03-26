@@ -12,23 +12,13 @@ export function getRootUrl() {
 }
 
 /**
- * Returns a valid URL to access the media gallery.
+ * Instance of the axios communicator.  The timeout was set to 2.5 seconds
+ * because in some cases, e.g. delete that includes S3 access, the
+ * operation can actually take quite a bit of time.
  */
-export function mgUrl(part: string) {
-  return `media_gallery/galleries${part}`;
-}
-
-/**
- * Returns a valid URL to access the media gallery with an authToken.
- */
-export function authMgUrl(part: string, authToken: string) {
-  return mgUrl(`${part}?auth_token=${authToken}`);
-}
-
-
 let axiosInstance = axios.create({
   baseURL: getRootUrl(),
-  timeout: 1000,
+  timeout: 2500,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',

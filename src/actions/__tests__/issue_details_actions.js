@@ -1,8 +1,10 @@
+// @flow
+
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { setCommunicatorInstance } from '../communicator';
+import { setCommunicatorInstance } from '../../common';
 import { getIssueDetails } from '../issue_details_actions';
 
 const TEST_ISSUE_ID = 4;
@@ -12,13 +14,9 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('issue_details_actions', () => {
-  beforeEach(() => {
-    setCommunicatorInstance(mock.axiosInstance);
-  });
+  beforeEach(() => setCommunicatorInstance(mock.axiosInstance));
 
-  afterEach(() => {
-    mock.reset();
-  });
+  afterEach(() => mock.reset());
 
   describe('getIssueDetails', () => {
     it('handles successful fetch', () => {

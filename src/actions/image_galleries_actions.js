@@ -1,6 +1,7 @@
 // @flow
 
-import { communicator, authMgUrl } from './communicator';
+import { Map } from 'immutable';
+import { communicator, url } from '../common';
 import type { ThunkAction } from './types';
 
 /**
@@ -15,8 +16,8 @@ export function createImageGallery(
     dispatch({ type: 'IMAGE_GALLERY_CREATE_REQUEST', galleryName, galleryDescription });
 
     try {
-      const url = authMgUrl('.json', authToken);
-      const response = await communicator().post(url, {
+      const imgUrl = url('/media_gallery/galleries.json', Map({ auth_token: authToken }));
+      const response = await communicator().post(imgUrl, {
         name: galleryName,
         description: galleryDescription,
       });
@@ -35,8 +36,8 @@ export function deleteImageGallery(authToken: string, galleryId: number): ThunkA
     dispatch({ type: 'IMAGE_GALLERY_DELETE_REQUEST' });
 
     try {
-      const url = authMgUrl(`/${galleryId}.json`, authToken);
-      await communicator().delete(url);
+      const imgUrl = url('/media_gallery/galleries.json', Map({ auth_token: authToken }));
+      await communicator().delete(imgUrl);
       dispatch({ type: 'IMAGE_GALLERY_DELETE_RESPONSE_OK', galleryId });
     } catch (error) {
       dispatch({ type: 'IMAGE_GALLERY_DELETE_RESPONSE_ERROR', error });
@@ -52,8 +53,8 @@ export function getImageGalleries(authToken: string): ThunkAction {
     dispatch({ type: 'IMAGE_GALLERY_LIST_REQUEST' });
 
     try {
-      const url = authMgUrl('.json', authToken);
-      const response = await communicator().get(url);
+      const gUrl = url('/media_gallery/galleries.json', Map({ auth_token: authToken }));
+      const response = await communicator().get(gUrl);
       dispatch({ type: 'IMAGE_GALLERY_LIST_RESPONSE_OK', galleries: response.data });
     } catch (error) {
       dispatch({ type: 'IMAGE_GALLERY_LIST_RESPONSE_ERROR', error });
@@ -69,8 +70,8 @@ export function getImageGallery(authToken: string, galleryId: number): ThunkActi
     dispatch({ type: 'IMAGE_GALLERY_SELECTION_REQUEST', galleryId });
 
     try {
-      const url = authMgUrl(`/${galleryId}.json`, authToken);
-      const response = await communicator().get(url);
+      const imgUrl = url(`/media_gallery/galleries/${galleryId}.json`, Map({ auth_token: authToken }));
+      const response = await communicator().get(imgUrl);
       dispatch({ type: 'IMAGE_GALLERY_SELECTION_RESPONSE_OK', gallery: response.data });
     } catch (error) {
       dispatch({ type: 'IMAGE_GALLERY_SELECTION_RESPONSE_ERROR', error });

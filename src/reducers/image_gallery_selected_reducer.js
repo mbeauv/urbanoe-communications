@@ -15,8 +15,14 @@ const INITIAL_STATE = {
   error: null,
 };
 
+function shouldDelete(state : State, galleryId: number) : bool {
+  return (state.gallery != null && state.gallery.id === galleryId);
+}
+
 export function imageGallerySelectedReducer(state : State = INITIAL_STATE, action: Action) {
   switch (action.type) {
+    case 'IMAGE_GALLERY_DELETE_RESPONSE_OK':
+      return shouldDelete(state, action.galleryId) ? INITIAL_STATE : state;
     case 'IMAGE_GALLERY_SELECTION_REQUEST':
       return { ...state, loading: true, gallery: null, error: null };
     case 'IMAGE_GALLERY_SELECTION_RESPONSE_OK':

@@ -1,8 +1,10 @@
+// @flow
+
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { setCommunicatorInstance } from '../communicator';
+import { setCommunicatorInstance } from '../../common';
 import {
   getImageGalleries,
   getImageGallery,
@@ -31,13 +33,9 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('image_galleries_actions', () => {
-  beforeEach(() => {
-    setCommunicatorInstance(mock.axiosInstance);
-  });
+  beforeEach(() => setCommunicatorInstance(mock.axiosInstance));
 
-  afterEach(() => {
-    mock.reset();
-  });
+  afterEach(() => mock.reset());
 
   describe('deleteImageGallery', () => {
     it('handles successful deletion', () => {

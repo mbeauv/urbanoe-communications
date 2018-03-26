@@ -1,8 +1,10 @@
+// @flow
+
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { setCommunicatorInstance } from '../communicator';
+import { setCommunicatorInstance } from '../../common';
 import { getSelectedUserProfile } from '../user_profile_actions';
 
 const TEST_USER_ID = 4;
@@ -12,21 +14,17 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('user_profile_actions', () => {
-  beforeEach(() => {
-    setCommunicatorInstance(mock.axiosInstance);
-  });
+  beforeEach(() => setCommunicatorInstance(mock.axiosInstance));
 
-  afterEach(() => {
-    mock.reset();
-  });
+  afterEach(() => mock.reset());
 
   describe('getSelectedUserProfile', () => {
     it('handles successful fetch', () => {
-      mock.onGet(`/end_users/${TEST_USER_ID}.json`).reply(200, { id: 4 });
+      mock.onGet(`/end_users/${TEST_USER_ID}.json`).reply(200, { id: TEST_USER_ID });
 
       const expectedActions = [
         { type: 'SELECTED_USER_PROFILE_REQUEST', userId: TEST_USER_ID },
-        { type: 'SELECTED_USER_PROFILE_RESPONSE_OK', userId: 4, userProfile: { id: 4 } },
+        { type: 'SELECTED_USER_PROFILE_RESPONSE_OK', userId: 4, userProfile: { id: TEST_USER_ID } },
       ];
 
       const store = mockStore({ todos: [] });

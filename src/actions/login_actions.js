@@ -1,6 +1,6 @@
 // @flow
 
-import { communicator } from './communicator';
+import { communicator } from '../common';
 import type { ThunkAction } from './types';
 
 /**

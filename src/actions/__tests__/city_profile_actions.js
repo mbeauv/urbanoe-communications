@@ -1,9 +1,11 @@
+// @flow
+
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { getCityProfile } from '../city_profile_actions';
-import { setCommunicatorInstance } from '../communicator';
+import { setCommunicatorInstance } from '../../common';
 
 const TEST_CITY_ID = 4;
 
@@ -12,13 +14,9 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('city_profile_actions', () => {
-  beforeEach(() => {
-    setCommunicatorInstance(mock.axiosInstance);
-  });
+  beforeEach(() => setCommunicatorInstance(mock.axiosInstance));
 
-  afterEach(() => {
-    mock.reset();
-  });
+  afterEach(() => mock.reset());
 
   describe('getCityProfile', () => {
     it('handles successful fetch', () => {

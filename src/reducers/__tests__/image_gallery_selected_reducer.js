@@ -19,6 +19,17 @@ describe('image_gallery_selected_reducer', () => {
       expect(imageGallerySelectedReducer(undefined, {})).toEqual(INITIAL_STATE);
     });
 
+    it('proecesses IMAGE_GALLERY_DELETE_RESPONSE_OK', () => {
+      expect(imageGallerySelectedReducer(
+        {
+          loading: false,
+          gallery: GALLERY,
+          error: null,
+        },
+        { type: 'IMAGE_GALLERY_DELETE_RESPONSE_OK', galleryId: 22 },
+      )).toEqual({ loading: false, gallery: null, error: null });
+    });
+
     it('processes IMAGE_GALLERY_SELECTION_REQUEST', () => {
       expect(imageGallerySelectedReducer(
         INITIAL_STATE,
