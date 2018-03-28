@@ -7,8 +7,7 @@ import { setCommunicatorInstance } from '../../common';
 import { createImageScratch, deleteImageScratch } from '../image_scratches_actions';
 
 const AUTH_TOKEN = 'blbla';
-const IMAGE_FILE = { name: 'test' };
-
+const IMAGE_DATA = 'imageb64data';
 
 const mock = new MockAdapter(axios);
 const middlewares = [thunk];
@@ -22,8 +21,8 @@ describe('image_scratches_actions', () => {
   describe('createImageScratch', () => {
     it('handles successful create', () => {
       mock.onPost(`/media_gallery/image_scratches.json?auth_token=${AUTH_TOKEN}`, {
-        scratchImage: {
-          image: IMAGE_FILE,
+        image_scratch: {
+          image: IMAGE_DATA,
         },
       }).reply(200, { id: 4 });
 
@@ -34,7 +33,7 @@ describe('image_scratches_actions', () => {
 
       const store = mockStore({});
 
-      return store.dispatch(createImageScratch(AUTH_TOKEN, IMAGE_FILE)).then(() => {
+      return store.dispatch(createImageScratch(AUTH_TOKEN, IMAGE_DATA)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });

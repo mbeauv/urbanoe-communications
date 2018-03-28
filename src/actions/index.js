@@ -9,4 +9,5 @@ export * from './user_profile_actions';
 export * from './login_actions';
 export * from './image_galleries_actions';
 export * from './image_scratches_actions';
+export * from './image_info_actions';
 export * from './types';

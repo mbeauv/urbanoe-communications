@@ -18,7 +18,7 @@ export function getRootUrl() {
  */
 let axiosInstance = axios.create({
   baseURL: getRootUrl(),
-  timeout: 2500,
+  timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',

@@ -10,8 +10,9 @@ import type {
   UserProfileData,
   LoginInfo,
   ImageGalleryInfo,
-  ImageGalleryDetails,
   ImageGalleryImageInfo,
+  ImageGalleryDetails,
+  ImageGalleryImageInfoDetails,
   ImageScratchDetails,
 } from 'urbanoe-model';
 
@@ -46,6 +47,9 @@ export type Action =
   | { type: 'IMAGE_GALLERY_CREATE_REQUEST', galleryName: string }
   | { type: 'IMAGE_GALLERY_CREATE_RESPONSE_OK', gallery: ImageGalleryDetails }
   | { type: 'IMAGE_GALLERY_CREATE_RESPONSE_ERROR', error: Object }
+  | { type: 'IMAGE_GALLERY_UPDATE_REQUEST' }
+  | { type: 'IMAGE_GALLERY_UPDATE_RESPONSE_OK', gallery: ImageGalleryDetails }
+  | { type: 'IMAGE_GALLERY_UPDATE_REPSONSE_ERROR', error: Object }
   | { type: 'IMAGE_GALLERY_DELETE_REQUEST' }
   | { type: 'IMAGE_GALLERY_DELETE_RESPONSE_OK', galleryId: number }
   | { type: 'IMAGE_GALLERY_DELETE_RESPONSE_ERROR', error: Object }
@@ -56,13 +60,16 @@ export type Action =
   | { type: 'IMAGE_GALLERY_SELECTION_RESPONSE_OK', gallery: ImageGalleryDetails }
   | { type: 'IMAGE_GALLERY_SELECTION_RESPONSE_ERROR', error: Object}
   | { type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_REQUEST' }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_OK', imageInfo: ImageGalleryImageInfo }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_OK', imageInfo: ImageGalleryImageInfoDetails }
   | { type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_ERROR', error: Object }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_REQUEST' }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_RESPONSE_OK', imageInfo: ImageGalleryImageInfoDetails }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_RESPONSE_ERROR', error: Object }
   | { type: 'IMAGE_GALLERY_IMAGE_INFO_DELETE_REQUEST', galleryId: number, imageInfoId: number }
   | { type: 'IMAGE_GALLERY_IMAGE_INFO_DELETE_RESPONSE_OK', galleryId: number, imageInfoId: number }
   | { type: 'IMAGE_GALLERY_IMAGE_INFO_DELETE_RESPONSE_ERROR', galleryId: number, imageInfoId: number, error: Object }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_REQUEST', imageInfoId: number }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_RESPONSE_OK', imageInfo: ImageGalleryImageInfo }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_REQUEST' }
+  | { type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_RESPONSE_OK', imageInfo: ImageGalleryImageInfoDetails }
   | { type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_RESPONSE_ERROR', error: Object}
   | { type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_REQUEST' }
   | { type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_RESPONSE_OK', imageInfos: Array<ImageGalleryImageInfo> }

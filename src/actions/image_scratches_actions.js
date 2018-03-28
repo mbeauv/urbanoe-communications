@@ -6,13 +6,13 @@ import { communicator, url } from '../common';
 
 const scratchUrl = (authToken : string) => url('/media_gallery/image_scratches.json', Map({ auth_token: authToken }));
 
-export function createImageScratch(authToken: string, imageFile: Object) : ThunkAction {
+export function createImageScratch(authToken: string, image: string) : ThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'IMAGE_GALLERY_SCRATCH_CREATE_REQUEST' });
     try {
       const response = await communicator().post(scratchUrl(authToken), {
-        scratchImage: {
-          image: imageFile,
+        image_scratch: {
+          image,
         },
       });
       dispatch({ type: 'IMAGE_GALLERY_SCRATCH_CREATE_RESPONSE_OK', scratchImage: response.data });

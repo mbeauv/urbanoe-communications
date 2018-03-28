@@ -9,6 +9,7 @@ import {
   getImageGalleries,
   getImageGallery,
   createImageGallery,
+  updateImageGallery,
   deleteImageGallery,
 } from '../image_galleries_actions';
 
@@ -51,6 +52,37 @@ describe('image_galleries_actions', () => {
 
     return store.dispatch(deleteImageGallery(AUTH_TOKEN, GALLERY1_ID)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('updateImageGallery', () => {
+    it('handles successful creation', () => {
+      mock.onPost(`/media_gallery/galleries/${GALLERY1_ID}.json?auth_token=${AUTH_TOKEN}`, {
+        name: GALLERY1_NAME,
+        description: GALLERY1_DESCRIPTION,
+      }).reply(200, GALLERY1);
+
+
+      const expectedActions = [
+        {
+          type: 'IMAGE_GALLERY_UPDATE_REQUEST',
+        },
+        {
+          type: 'IMAGE_GALLERY_CREATE_RESPONSE_OK',
+          gallery: GALLERY1,
+        },
+      ];
+
+      const store = mockStore({ todos: [] });
+
+      return store.dispatch(updateImageGallery(
+        AUTH_TOKEN,
+        GALLERY1_ID,
+        GALLERY1_NAME,
+        GALLERY1_DESCRIPTION,
+      )).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
     });
   });
 
