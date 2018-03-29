@@ -56,7 +56,7 @@ describe('image_galleries_actions', () => {
   });
 
   describe('updateImageGallery', () => {
-    it('handles successful creation', () => {
+    it('handles successful update', () => {
       mock.onPut(`/media_gallery/galleries/${GALLERY1_ID}.json?auth_token=${AUTH_TOKEN}`, {
         name: GALLERY1_NAME,
         description: GALLERY1_DESCRIPTION,
@@ -68,7 +68,7 @@ describe('image_galleries_actions', () => {
           type: 'IMAGE_GALLERY_UPDATE_REQUEST',
         },
         {
-          type: 'IMAGE_GALLERY_CREATE_RESPONSE_OK',
+          type: 'IMAGE_GALLERY_UPDATE_RESPONSE_OK',
           gallery: GALLERY1,
         },
       ];

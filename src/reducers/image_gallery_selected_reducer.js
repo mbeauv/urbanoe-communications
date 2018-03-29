@@ -1,6 +1,6 @@
 // @flow
 
-import type { ImageGalleryDetails } from 'urbanoe-model';
+import type { ImageGalleryDetails, ImageGalleryImageInfoDetails } from 'urbanoe-model';
 import type { Action } from '../actions/types';
 
 type State = {
@@ -23,8 +23,22 @@ function shouldDelete(state : State, galleryId: number) : bool {
   return (state.gallery != null && state.gallery.id === galleryId);
 }
 
+function processImageInfo(gallery : ImageGalleryDetails, imageInfo: ImageGalleryImageInfoDetails)
+: ImageGalleryDetails {
+  if (imageInfo.galleryId === gallery.id) {
+    const imageInfos = [
+      ...gallery.imageInfos,
+      { name: imageInfo.name, url: imageInfo.version[0].url },
+    ];
+    return { ...gallery, imageInfos };
+  }
+  return gallery;
+}
+
 export function imageGallerySelectedReducer(state : State = INITIAL_STATE, action: Action) {
   switch (action.type) {
+    case 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_OK':
+      return { ...state, gallery: processImageInfo(state.gallery, action.imageInfo) };
     case 'IMAGE_GALLERY_UPDATE_RESPONSE_OK':
       return { ...state, gallery: action.gallery };
     case 'IMAGE_GALLERY_DELETE_RESPONSE_OK':

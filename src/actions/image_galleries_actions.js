@@ -22,7 +22,7 @@ export function updateImageGallery(
         name,
         description,
       });
-      dispatch({ type: 'IMAGE_GALLERY_CREATE_RESPONSE_OK', gallery: response.data });
+      dispatch({ type: 'IMAGE_GALLERY_UPDATE_RESPONSE_OK', gallery: response.data });
     } catch (error) {
       dispatch({ type: 'IMAGE_GALLERY_UPDATE_REPSONSE_ERROR', error });
     }
