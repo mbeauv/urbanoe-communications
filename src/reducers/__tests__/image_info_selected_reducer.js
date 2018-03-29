@@ -2,12 +2,15 @@
 
 import { imageInfoSelectedReducer } from '../image_info_selected_reducer';
 
+const VALID_GALLERY_ID = 22;
+const VALID_ID = 12;
+
 const VALID_IMAGE_INFO = {
   createdAt: 'blah',
   description: 'a descrption',
-  galleryId: 12,
+  galleryId: VALID_GALLERY_ID,
   galleryName: 'agalleryname',
-  id: 22,
+  id: VALID_ID,
   name: 'aname',
   originalUrl: 'aurl',
   version: [
@@ -51,6 +54,20 @@ describe('image_info_selected_reducer', () => {
       });
     });
 
+    it('processes IMAGE_GALLERY_DELETE_RESPONSE_OK when selected is deleted', () => {
+      expect(imageInfoSelectedReducer(VALID_STATE, {
+        type: 'IMAGE_GALLERY_DELETE_RESPONSE_OK',
+        galleryId: VALID_GALLERY_ID,
+      })).toEqual(EMPTY_STATE);
+    });
+
+    it('processes IMAGE_GALLERY_DELETE_RESPONSE_OK when selected is not deleted', () => {
+      expect(imageInfoSelectedReducer(VALID_STATE, {
+        type: 'IMAGE_GALLERY_DELETE_RESPONSE_OK',
+        galleryId: VALID_GALLERY_ID + 1,
+      })).toEqual(VALID_STATE);
+    });
+
     it('processes IMAGE_GALLERY_IMAGE_INFO_SELECTED_RESPONSE_OK', () => {
       expect(imageInfoSelectedReducer(EMPTY_STATE, {
         type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_RESPONSE_OK',
@@ -68,8 +85,8 @@ describe('image_info_selected_reducer', () => {
     it('processes IMAGE_GALLERY_IMAGE_INFO_DELETE_RESPONSE_OK when deleted is selected', () => {
       expect(imageInfoSelectedReducer(VALID_STATE, {
         type: 'IMAGE_GALLERY_IMAGE_INFO_DELETE_RESPONSE_OK',
-        galleryId: VALID_IMAGE_INFO.galleryId,
-        imageInfoId: VALID_IMAGE_INFO.id,
+        galleryId: VALID_GALLERY_ID,
+        imageInfoId: VALID_ID,
       })).toEqual(EMPTY_STATE);
     });
 

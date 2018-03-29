@@ -16,27 +16,29 @@ const INITIAL_STATE = {
   imageInfo: null,
 };
 
-function calculateStateForDeletion(
-  state: State,
-  deletedGalleryId: number,
-  deletedImageInfoId: number,
-) : State {
-  if (state.imageInfo === null) {
-    return INITIAL_STATE;
+function processImageInfoDelete(imageInfo: ?ImageGalleryImageInfoDetails, action: Action)
+  : ?ImageGalleryImageInfoDetails {
+  if (imageInfo) {
+    const { id, galleryId } = imageInfo;
+    return (galleryId === action.galleryId && id === action.imageInfoId) ? null : imageInfo;
   }
+  return null;
+}
 
-  const { galleryId, id } = state.imageInfo;
-  if (galleryId === deletedGalleryId && id === deletedImageInfoId) {
-    return INITIAL_STATE;
+function processImageGalleryDelete(imageInfo: ?ImageGalleryImageInfoDetails, galleryId: number)
+: ?ImageGalleryImageInfoDetails {
+  if (imageInfo) {
+    return (imageInfo.galleryId === galleryId) ? null : imageInfo;
   }
-
-  return state;
+  return null;
 }
 
 export function imageInfoSelectedReducer(state : State = INITIAL_STATE, action : Action) : State {
   switch (action.type) {
+    case 'IMAGE_GALLERY_DELETE_RESPONSE_OK':
+      return { ...state, imageInfo: processImageGalleryDelete(state.imageInfo, action.galleryId) };
     case 'IMAGE_GALLERY_IMAGE_INFO_DELETE_RESPONSE_OK':
-      return calculateStateForDeletion(state, action.galleryId, action.imageInfoId);
+      return { ...state, imageInfo: processImageInfoDelete(state.imageInfo, action) };
     case 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_REQUEST':
       return { ...state, loading: true, error: null, imageInfo: null };
     case 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_RESPONSE_OK':

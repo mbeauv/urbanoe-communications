@@ -28,6 +28,14 @@ describe('image_gallery_selected_reducer', () => {
       expect(imageGallerySelectedReducer(undefined, { type: 'LOGOUT_REQUEST' })).toEqual(INITIAL_STATE);
     });
 
+    it('processes IMAGE_GALLERY_UPDATE_RESPONSE_OK', () => {
+      const modifGallery = { ...VALID_GALLERY, description: 'a new description' };
+      expect(imageGallerySelectedReducer(
+        { loading: false, gallery: VALID_GALLERY, error: null },
+        { type: 'IMAGE_GALLERY_UPDATE_RESPONSE_OK', gallery: modifGallery },
+      )).toEqual({ loading: false, gallery: modifGallery, error: null });
+    });
+
     it('processes IMAGE_GALLERY_DELETE_RESPONSE_OK', () => {
       expect(imageGallerySelectedReducer(
         { loading: false, gallery: VALID_GALLERY, error: null },

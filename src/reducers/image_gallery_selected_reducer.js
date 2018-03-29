@@ -25,6 +25,8 @@ function shouldDelete(state : State, galleryId: number) : bool {
 
 export function imageGallerySelectedReducer(state : State = INITIAL_STATE, action: Action) {
   switch (action.type) {
+    case 'IMAGE_GALLERY_UPDATE_RESPONSE_OK':
+      return { ...state, gallery: action.gallery };
     case 'IMAGE_GALLERY_DELETE_RESPONSE_OK':
       return shouldDelete(state, action.galleryId) ? INITIAL_STATE : state;
     case 'IMAGE_GALLERY_SELECTION_REQUEST':
