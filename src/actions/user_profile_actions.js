@@ -1,5 +1,3 @@
-// @flow
-
 import { communicator } from '../common';
 import type { ThunkAction } from './types';
 

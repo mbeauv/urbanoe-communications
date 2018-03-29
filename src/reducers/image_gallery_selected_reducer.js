@@ -15,6 +15,10 @@ const INITIAL_STATE = {
   error: null,
 };
 
+/**
+ * Verifies if the selected gallery should be deleted or not. It will be
+ * deleted if it's the same gallery.
+ */
 function shouldDelete(state : State, galleryId: number) : bool {
   return (state.gallery != null && state.gallery.id === galleryId);
 }

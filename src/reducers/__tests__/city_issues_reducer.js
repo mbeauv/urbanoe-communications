@@ -1,3 +1,5 @@
+// @flow
+
 import { cityIssuesReducer } from '../city_issues_reducer';
 
 const TEST_CITY_ID = 5;

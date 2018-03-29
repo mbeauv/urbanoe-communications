@@ -56,7 +56,7 @@ export type Action =
   | { type: 'IMAGE_GALLERY_LIST_REQUEST' }
   | { type: 'IMAGE_GALLERY_LIST_RESPONSE_OK', galleries: Array<ImageGalleryInfo> }
   | { type: 'IMAGE_GALLERY_LIST_RESPONSE_ERROR', error: Object }
-  | { type: 'IMAGE_GALLERY_SELECTION_REQUEST', galleryId: number }
+  | { type: 'IMAGE_GALLERY_SELECTION_REQUEST' }
   | { type: 'IMAGE_GALLERY_SELECTION_RESPONSE_OK', gallery: ImageGalleryDetails }
   | { type: 'IMAGE_GALLERY_SELECTION_RESPONSE_ERROR', error: Object}
   | { type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_REQUEST' }

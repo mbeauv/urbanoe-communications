@@ -18,7 +18,7 @@ export function updateImageGallery(
 
     try {
       const imgUrl = url(`/media_gallery/galleries/${id}.json`, Map({ auth_token: authToken }));
-      const response = await communicator().post(imgUrl, {
+      const response = await communicator().put(imgUrl, {
         name,
         description,
       });

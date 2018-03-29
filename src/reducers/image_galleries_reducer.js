@@ -35,7 +35,7 @@ export function imageGalleriesReducer(state: State = INITIAL_STATE, action: Acti
     case 'IMAGE_GALLERY_CREATE_RESPONSE_OK':
       return { ...state, galleries: addGallery(state.galleries, action.gallery) };
     case 'IMAGE_GALLERY_LIST_REQUEST':
-      return { ...state, loading: true, galleries: new Map() };
+      return { ...state, loading: true };
     case 'IMAGE_GALLERY_LIST_RESPONSE_OK':
       return { ...state, loading: false, galleries: createGalleries(action.galleries) };
     case 'IMAGE_GALLERY_LIST_RESPONSE_ERROR':
