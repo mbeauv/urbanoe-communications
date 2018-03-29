@@ -23,9 +23,9 @@ function shouldDelete(state : State, galleryId: number) : bool {
   return (state.gallery != null && state.gallery.id === galleryId);
 }
 
-function processImageInfo(gallery : ImageGalleryDetails, imageInfo: ImageGalleryImageInfoDetails)
-: ImageGalleryDetails {
-  if (imageInfo.galleryId === gallery.id) {
+function processImageInfo(gallery : ?ImageGalleryDetails, imageInfo: ImageGalleryImageInfoDetails)
+: ?ImageGalleryDetails {
+  if (gallery && imageInfo.galleryId === gallery.id) {
     const imageInfos = [
       ...gallery.imageInfos,
       { name: imageInfo.name, url: imageInfo.version[0].url },
