@@ -16,6 +16,8 @@ const INITIAL_STATE = {
 
 export function imageScratchReducer(state: State = INITIAL_STATE, action: Action) : State {
   switch (action.type) {
+    case 'IMAGE_GALLERY_SCRATCH_REINIT_LOCAL':
+      return INITIAL_STATE;
     case 'IMAGE_GALLERY_SCRATCH_CREATE_REQUEST':
       return { ...state, loading: true, error: null, imageScratch: null };
     case 'IMAGE_GALLERY_SCRATCH_CREATE_RESPONSE_OK':

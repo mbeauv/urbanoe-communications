@@ -1,10 +1,14 @@
 // @flow
 
 import { Map } from 'immutable';
-import type { ThunkAction } from './types';
+import type { ThunkAction, Action } from './types';
 import { communicator, url } from '../common';
 
 const scratchUrl = (authToken : string) => url('/media_gallery/image_scratches.json', Map({ auth_token: authToken }));
+
+export function clearLocalScratch() : Action {
+  return { type: 'IMAGE_GALLERY_SCRATCH_REINIT_LOCAL' };
+}
 
 export function createImageScratch(authToken: string, image: string) : ThunkAction {
   return async (dispatch) => {

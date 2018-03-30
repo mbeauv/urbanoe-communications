@@ -80,6 +80,7 @@ export type Action =
   | { type: 'IMAGE_GALLERY_SCRATCH_DELETE_REQUEST' }
   | { type: 'IMAGE_GALLERY_SCRATCH_DELETE_RESPONSE_OK' }
   | { type: 'IMAGE_GALLERY_SCRATCH_DELETE_RESPONSE_ERROR' }
+  | { type: 'IMAGE_GALLERY_SCRATCH_REINIT_LOCAL' }
   | { type: 'ISSUE_DETAILS_REQUEST', issueId: number }
   | { type: 'ISSUE_DETAILS_RESPONSE_OK', issueId: number, issueDetails: IssueDetailsData }
   | { type: 'ISSUE_DETAILS_RESPONSE_ERROR', issueId: number, error: Object }

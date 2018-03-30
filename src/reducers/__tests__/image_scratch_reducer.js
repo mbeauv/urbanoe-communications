@@ -29,6 +29,13 @@ describe('image_scratch_reducer', () => {
       expect(imageScratchReducer(INITIAL_STATE, { type: 'LOGOUT_REQUEST' })).toEqual(INITIAL_STATE);
     });
 
+    it('processes IMAGE_GALLERY_SCRATCH_REINIT_LOCAL', () => {
+      expect(imageScratchReducer(
+        { loading: false, error: null, imageScratch: VALID_SCRATCH },
+        { type: 'IMAGE_GALLERY_SCRATCH_REINIT_LOCAL' },
+      )).toEqual(INITIAL_STATE);
+    });
+
     it('processes IMAGE_GALLERY_SCRATCH_CREATE_REQUEST', () => {
       expect(imageScratchReducer(INITIAL_STATE, CREATE_REQUEST)).toEqual({
         loading: true,
