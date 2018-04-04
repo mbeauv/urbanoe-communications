@@ -1,37 +1,50 @@
+// @flow
+
+import type { PieChartData } from 'urbanoe-model';
 import { cityStatisticsReducer } from '../city_statistics_reducer';
 
-const EMPTY_STATE = {};
 const TEST_STATS_TYPE = 'pie';
 const TEST_CITY_ID = 5;
-const TEST_CHART = { datum1: 'data' };
+const TEST_CHART : PieChartData = {
+  title: 'a title',
+  subTitle: 'a subtitle',
+  type: 'pie',
+  data: [{
+    color: 'blue',
+    label: 'alabel',
+    value: 24,
+  }],
+};
+
 const TEST_ERROR = { content: 'error' };
 
 describe('city_statistics_reducer', () => {
   it('returns state is action is unsupported type', () => {
-    expect(cityStatisticsReducer(EMPTY_STATE, { type: 'BLAH_BLAH', error: TEST_ERROR }))
-      .toEqual(EMPTY_STATE);
+    expect(cityStatisticsReducer({}, { type: 'LOGOUT_REQUEST' })).toEqual({});
   });
 
   it('initializes with proper value', () => {
-    expect(cityStatisticsReducer(undefined, {})).toEqual(EMPTY_STATE);
+    expect(cityStatisticsReducer(undefined, { type: 'LOGOUT_REQUEST' })).toEqual({});
   });
 
   it('processes CITY_STATISTICS_REQUEST', () => {
-    expect(cityStatisticsReducer(
-      EMPTY_STATE,
-      { type: 'CITY_STATISTICS_REQUEST', cityId: TEST_CITY_ID, statsType: TEST_STATS_TYPE },
-    )).toEqual({ pie: { loading: true } });
+    const expectedState = { pie: { loading: true, error: null, chart: null } };
+    expect(cityStatisticsReducer({}, {
+      type: 'CITY_STATISTICS_REQUEST',
+      cityId: TEST_CITY_ID,
+      statsType: TEST_STATS_TYPE,
+    })).toEqual(expectedState);
   });
 
   it('processes CITY_STATISTICS_RESPONSE_OK', () => {
-    expect(cityStatisticsReducer(
-      EMPTY_STATE,
-      { type: 'CITY_STATISTICS_RESPONSE_OK', cityId: TEST_CITY_ID, statsType: 'pie', chart: TEST_CHART },
-    )).toEqual({
+    expect(cityStatisticsReducer({}, {
+      type: 'CITY_STATISTICS_RESPONSE_OK',
+      cityId: TEST_CITY_ID,
+      statsType: 'pie',
+      chart: TEST_CHART,
+    })).toEqual({
       pie: {
-        chart: {
-          datum1: 'data',
-        },
+        chart: TEST_CHART,
         loading: false,
       },
     });
@@ -39,7 +52,7 @@ describe('city_statistics_reducer', () => {
 
   it('processes CITY_STATISTICS_RESPONSE_ERROR', () => {
     expect(cityStatisticsReducer(
-      EMPTY_STATE,
+      {},
       { type: 'CITY_STATISTICS_RESPONSE_ERROR', cityId: 23, statsType: 'slice', error: TEST_ERROR },
     )).toEqual({
       slice: {

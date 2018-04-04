@@ -5,7 +5,6 @@ export * from './city_statistics_reducer';
 export * from './issue_details_reducer';
 export * from './selected_user_profile_reducer';
 export * from './login_reducer';
-export * from './image_gallery_selected_reducer';
 export * from './image_scratch_reducer';
-export * from './image_info_selected_reducer';
+export * from './image_infos_reducer';
 export * from './image_galleries_reducer';

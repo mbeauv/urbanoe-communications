@@ -1,68 +1,105 @@
 // @flow
 import { Map } from 'immutable';
-import type { ImageGalleryInfo, ImageGalleryDetails, ImageGalleryImageInfoDetails } from 'urbanoe-model';
+import type { ImageGallery } from 'urbanoe-model';
 import type { Action } from '../actions';
+
+type ImageGalleryState = {
+  +loading: boolean,
+  +error: ?Object,
+  +gallery: ImageGallery,
+};
 
 type State = {
   loading: boolean,
   +error: ?Object,
-  +galleries: Map<number, ImageGalleryInfo>,
+  +galleries: Map<string, ImageGalleryState>,
 }
 
-function convertGalleryDetailsToInfo(details : ImageGalleryDetails) : ImageGalleryInfo {
-  const { id, description, name } = details;
-  return { id, description, name, nbImages: details.imageInfos.length };
-}
+const galleryIndex = (galleryId: number) => `gallery_${galleryId}`;
 
-function addGallery(galleries: Map<number, ImageGalleryInfo>, gallery: ImageGalleryDetails) :
-  Map<number, ImageGalleryInfo> {
-  return galleries.set(parseInt(gallery.id, 10), convertGalleryDetailsToInfo(gallery));
-}
+const createGalleryState = (gallery: ImageGallery) : ImageGalleryState =>
+  ({ loading: false, error: null, gallery });
 
-function createGalleries(galleries : Array<ImageGalleryInfo>) : Map<number, ImageGalleryInfo> {
-  return Map(galleries.map(item => [parseInt(item.id, 10), item]));
-}
-
-function processImageInfoCreate(
-  state : State,
-  { galleryId }: ImageGalleryImageInfoDetails,
-) : State {
-  const gallery = state.galleries.get(galleryId);
-  if (gallery) {
-    const newGallery = { ...gallery, nbImages: gallery.nbImages + 1 };
-    return { ...state, galleries: state.galleries.set(galleryId, newGallery) };
-  }
-  return state;
-}
+const createGalleries = (galleries : Array<ImageGallery>) : Map<string, ImageGalleryState> =>
+  (Map(galleries.map(item => [galleryIndex(item.id), createGalleryState(item)])));
 
 const INITIAL_STATE : State = {
   loading: false,
   error: null,
-  galleries: (new Map(): Map<number, ImageGalleryInfo>),
+  galleries: (new Map(): Map<string, ImageGalleryState>),
 };
 
 export function imageGalleriesReducer(state: State = INITIAL_STATE, action: Action): State {
   switch (action.type) {
-    case 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_OK':
-      return processImageInfoCreate(state, action.imageInfo);
+    case 'IMAGE_GALLERY_DELETE_REQUEST':
+      return {
+        ...state,
+        galleries: state.galleries.mergeDeep({
+          [galleryIndex(action.galleryId)]: {
+            loading: true,
+            error: null,
+          },
+        }) };
+    case 'IMAGE_GALLERY_DELETE_RESPONSE_ERROR':
+      return {
+        ...state,
+        galleries: state.galleries.mergeDeep({
+          [galleryIndex(action.galleryId)]: {
+            loading: false,
+            error: action.error,
+          },
+        }) };
+    case 'IMAGE_GALLERY_DELETE_RESPONSE_OK':
+      return {
+        ...state,
+        galleries: state.galleries.remove(galleryIndex(action.galleryId)),
+      };
+    case 'IMAGE_GALLERY_UPDATE_REQUEST':
+      return {
+        ...state,
+        galleries: state.galleries.mergeDeep({
+          [galleryIndex(action.galleryId)]: {
+            loading: true,
+            error: null,
+          },
+        }) };
+    case 'IMAGE_GALLERY_UPDATE_RESPONSE_ERROR':
+      return {
+        ...state,
+        galleries: state.galleries.mergeDeep({
+          [galleryIndex(action.galleryId)]: {
+            loading: false,
+            error: action.error,
+          },
+        }) };
     case 'IMAGE_GALLERY_UPDATE_RESPONSE_OK':
       return {
         ...state,
-        galleries: state.galleries.set(
-          action.gallery.id,
-          convertGalleryDetailsToInfo(action.gallery),
-        ),
-      };
-    case 'IMAGE_GALLERY_DELETE_RESPONSE_OK':
-      return { ...state, galleries: state.galleries.delete(action.galleryId) };
+        galleries: state.galleries.mergeDeep({
+          [galleryIndex(action.gallery.id)]: {
+            loading: false,
+            error: null,
+            gallery: action.gallery,
+          },
+        }) };
+    case 'IMAGE_GALLERY_CREATE_REQUEST':
+      return { ...state, loading: true, error: null, galleries: Map() };
+    case 'IMAGE_GALLERY_CREATE_RESPONSE_ERROR':
+      return { ...state, loading: false, error: action.error, galleries: Map() };
     case 'IMAGE_GALLERY_CREATE_RESPONSE_OK':
-      return { ...state, galleries: addGallery(state.galleries, action.gallery) };
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        galleries:
+          state.galleries.set(galleryIndex(action.gallery.id), createGalleryState(action.gallery)),
+      };
     case 'IMAGE_GALLERY_LIST_REQUEST':
-      return { ...state, loading: true };
+      return { ...state, loading: true, error: null, galleries: Map() };
     case 'IMAGE_GALLERY_LIST_RESPONSE_OK':
       return { ...state, loading: false, galleries: createGalleries(action.galleries) };
     case 'IMAGE_GALLERY_LIST_RESPONSE_ERROR':
-      return { ...state, loading: false, error: action.error };
+      return { ...state, loading: false, error: action.error, galleries: Map() };
     default:
       return state;
   }
