@@ -29,59 +29,34 @@ const INITIAL_STATE : State = {
   galleries: (new Map(): Map<string, ImageGalleryState>),
 };
 
+function mergeGallery(state: State, galleryId: number, attribs: Object) : State {
+  return {
+    ...state,
+    galleries: state.galleries.mergeDeep({
+      [galleryIndex(galleryId)]: attribs,
+    }) };
+}
+
 export function imageGalleriesReducer(state: State = INITIAL_STATE, action: Action): State {
   switch (action.type) {
     case 'IMAGE_GALLERY_DELETE_REQUEST':
-      return {
-        ...state,
-        galleries: state.galleries.mergeDeep({
-          [galleryIndex(action.galleryId)]: {
-            loading: true,
-            error: null,
-          },
-        }) };
+      return mergeGallery(state, action.galleryId, { loading: true, error: null });
     case 'IMAGE_GALLERY_DELETE_RESPONSE_ERROR':
-      return {
-        ...state,
-        galleries: state.galleries.mergeDeep({
-          [galleryIndex(action.galleryId)]: {
-            loading: false,
-            error: action.error,
-          },
-        }) };
+      return mergeGallery(state, action.galleryId, { loading: false, error: action.error });
     case 'IMAGE_GALLERY_DELETE_RESPONSE_OK':
       return {
         ...state,
         galleries: state.galleries.remove(galleryIndex(action.galleryId)),
       };
     case 'IMAGE_GALLERY_UPDATE_REQUEST':
-      return {
-        ...state,
-        galleries: state.galleries.mergeDeep({
-          [galleryIndex(action.galleryId)]: {
-            loading: true,
-            error: null,
-          },
-        }) };
+      return mergeGallery(state, action.galleryId, { loading: true, error: null });
     case 'IMAGE_GALLERY_UPDATE_RESPONSE_ERROR':
-      return {
-        ...state,
-        galleries: state.galleries.mergeDeep({
-          [galleryIndex(action.galleryId)]: {
-            loading: false,
-            error: action.error,
-          },
-        }) };
+      return mergeGallery(state, action.galleryId, { loading: false, error: action.error });
     case 'IMAGE_GALLERY_UPDATE_RESPONSE_OK':
-      return {
-        ...state,
-        galleries: state.galleries.mergeDeep({
-          [galleryIndex(action.gallery.id)]: {
-            loading: false,
-            error: null,
-            gallery: action.gallery,
-          },
-        }) };
+      return mergeGallery(state, action.gallery.id, {
+        loading: false,
+        error: null,
+        gallery: action.gallery });
     case 'IMAGE_GALLERY_CREATE_REQUEST':
       return { ...state, loading: true, error: null, galleries: Map() };
     case 'IMAGE_GALLERY_CREATE_RESPONSE_ERROR':

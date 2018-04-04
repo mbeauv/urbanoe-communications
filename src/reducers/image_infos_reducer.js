@@ -62,141 +62,94 @@ function processDeleteOk(
   return state;
 }
 
+function mergeGallery(state: State, galleryId: number, attribs: Object) : State {
+  return {
+    ...state,
+    galleryImages: state.galleryImages.mergeDeep({
+      [galleryImageIndex(galleryId)]: attribs,
+    }),
+  };
+}
+
+function mergeGalleryImages(
+  state: State,
+  galleryId: number,
+  imageInfoId: number,
+  attribs: Object,
+) : State {
+  return {
+    ...state,
+    galleryImages: state.galleryImages.mergeDeep({
+      [galleryImageIndex(galleryId)]: {
+        loading: false,
+        error: null,
+        imageInfos: {
+          [imageIndex(imageInfoId)]: attribs,
+        },
+      },
+    }),
+  };
+}
+
 export function imageInfosReducer(state : State = INITIAL_STATE, action : Action) : State {
   switch (action.type) {
     case 'IMAGE_GALLERY_IMAGE_INFO_LIST_REQUEST':
-      return {
-        ...state,
-        galleryImages: state.galleryImages.mergeDeep({
-          [galleryImageIndex(action.galleryId)]: {
-            loading: true,
-            error: null,
-            imageInfos: Map(),
-          },
-        }),
-      };
+      return mergeGallery(state, action.galleryId, {
+        loading: true,
+        error: null,
+        imageInfos: Map(),
+      });
     case 'IMAGE_GALLERY_IMAGE_INFO_LIST_RESPONSE_ERROR':
-      return {
-        ...state,
-        galleryImages: state.galleryImages.mergeDeep({
-          [galleryImageIndex(action.galleryId)]: {
-            loading: false,
-            error: action.error,
-          },
-        }),
-      };
+      return mergeGallery(state, action.galleryId, {
+        loading: false,
+        error: action.error,
+      });
     case 'IMAGE_GALLERY_IMAGE_INFO_LIST_RESPONSE_OK':
       return processGalleryListResponseOk(state, action.galleryId, action.imageInfos);
     case 'IMAGE_GALLERY_IMAGE_INFO_CREATE_REQUEST':
-      return {
-        ...state,
-        galleryImages: state.galleryImages.mergeDeep({
-          [galleryImageIndex(action.galleryId)]: {
-            loading: true,
-            error: null,
-          },
-        }),
-      };
+      return mergeGallery(state, action.galleryId, {
+        loading: true,
+        error: null,
+      });
     case 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_ERROR':
-      return {
-        ...state,
-        galleryImages: state.galleryImages.mergeDeep({
-          [galleryImageIndex(action.galleryId)]: {
-            loading: false,
-            error: action.error,
-          },
-        }),
-      };
+      return mergeGallery(state, action.galleryId, {
+        loading: false,
+        error: action.error,
+      });
     case 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_OK':
-      return {
-        ...state,
-        galleryImages: state.galleryImages.mergeDeep({
-          [galleryImageIndex(action.galleryId)]: {
-            loading: false,
-            error: null,
-            imageInfos: {
-              [imageIndex(action.imageInfo.id)]: {
-                loading: false,
-                error: null,
-                imageInfo: action.imageInfo,
-              },
-            },
-          },
-        }),
-      };
+      return mergeGalleryImages(state, action.galleryId, action.imageInfo.id, {
+        loading: false,
+        error: null,
+        imageInfo: action.imageInfo,
+      });
     case 'IMAGE_GALLERY_IMAGE_INFO_DELETE_REQUEST':
-      return {
-        ...state,
-        galleryImages: state.galleryImages.mergeDeep({
-          [galleryImageIndex(action.galleryId)]: {
-            imageInfos: Map({
-              [imageIndex(action.imageInfoId)]: {
-                loading: true,
-                error: null,
-              },
-            }),
-          },
-        }),
-      };
+      return mergeGalleryImages(state, action.galleryId, action.imageInfoId, {
+        loading: true,
+        error: null,
+      });
     case 'IMAGE_GALLERY_IMAGE_INFO_DELETE_RESPONSE_ERROR':
-      return {
-        ...state,
-        galleryImages: state.galleryImages.mergeDeep({
-          [galleryImageIndex(action.galleryId)]: {
-            imageInfos: Map({
-              [imageIndex(action.imageInfoId)]: {
-                loading: false,
-                error: action.error,
-              },
-            }),
-          },
-        }),
-      };
+      return mergeGalleryImages(state, action.galleryId, action.imageInfoId, {
+        loading: false,
+        error: action.error,
+      });
     case 'IMAGE_GALLERY_IMAGE_INFO_DELETE_RESPONSE_OK':
       return processDeleteOk(state, action.galleryId, action.imageInfoId);
     case 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_REQUEST':
-      return {
-        ...state,
-        galleryImages: state.galleryImages.mergeDeep({
-          [galleryImageIndex(action.galleryId)]: {
-            imageInfos: Map({
-              [imageIndex(action.imageInfoId)]: {
-                loading: true,
-                error: null,
-              },
-            }),
-          },
-        }),
-      };
+      return mergeGalleryImages(state, action.galleryId, action.imageInfoId, {
+        loading: true,
+        error: null,
+      });
     case 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_RESPONSE_ERROR':
-      return {
-        ...state,
-        galleryImages: state.galleryImages.mergeDeep({
-          [galleryImageIndex(action.galleryId)]: {
-            imageInfos: Map({
-              [imageIndex(action.imageInfoId)]: {
-                loading: false,
-                error: action.error,
-              },
-            }),
-          },
-        }),
-      };
+      return mergeGalleryImages(state, action.galleryId, action.imageInfoId, {
+        loading: false,
+        error: action.error,
+      });
     case 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_RESPONSE_OK':
-      return {
-        ...state,
-        galleryImages: state.galleryImages.mergeDeep({
-          [galleryImageIndex(action.galleryId)]: {
-            imageInfos: Map({
-              [imageIndex(action.imageInfo.id)]: {
-                loading: false,
-                error: null,
-                imageInfo: action.imageInfo,
-              },
-            }),
-          },
-        }),
-      };
+      return mergeGalleryImages(state, action.galleryId, action.imageInfo.id, {
+        loading: false,
+        error: null,
+        imageInfo: action.imageInfo,
+      });
     default:
       return state;
   }
