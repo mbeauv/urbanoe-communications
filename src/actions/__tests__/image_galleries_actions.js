@@ -7,7 +7,6 @@ import MockAdapter from 'axios-mock-adapter';
 import { setCommunicatorInstance } from '../../common';
 import {
   getImageGalleries,
-  getImageGallery,
   createImageGallery,
   updateImageGallery,
   deleteImageGallery,
@@ -66,6 +65,7 @@ describe('image_galleries_actions', () => {
       const expectedActions = [
         {
           type: 'IMAGE_GALLERY_UPDATE_REQUEST',
+          galleryId: GALLERY1_ID,
         },
         {
           type: 'IMAGE_GALLERY_UPDATE_RESPONSE_OK',
@@ -113,23 +113,6 @@ describe('image_galleries_actions', () => {
         GALLERY1_NAME,
         GALLERY1_DESCRIPTION,
       )).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
-    });
-  });
-
-  describe('getImageGallery', () => {
-    it('handles successful fetch', () => {
-      mock.onGet(`/media_gallery/galleries/${GALLERY1_ID}.json?auth_token=${AUTH_TOKEN}`).reply(200, GALLERY1);
-
-      const expectedActions = [
-        { type: 'IMAGE_GALLERY_SELECTION_REQUEST', galleryId: GALLERY1_ID },
-        { type: 'IMAGE_GALLERY_SELECTION_RESPONSE_OK', gallery: GALLERY1 },
-      ];
-
-      const store = mockStore({ todos: [] });
-
-      return store.dispatch(getImageGallery(AUTH_TOKEN, GALLERY1_ID)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });

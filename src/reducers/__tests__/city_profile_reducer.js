@@ -1,3 +1,5 @@
+// @flow
+
 import { cityProfileReducer } from '../city_profile_reducer';
 
 const EMPTY_STATE = { loading: false, cityProfile: null, error: null };
@@ -7,12 +9,12 @@ const TEST_ERROR = { content: 'error' };
 
 describe('city_news_reducer', () => {
   it('returns state is action is unsupported type', () => {
-    expect(cityProfileReducer(EMPTY_STATE, { type: 'BLAH_BLAH', error: TEST_ERROR }))
+    expect(cityProfileReducer(EMPTY_STATE, { type: 'LOGOUT_REQUEST' }))
       .toEqual(EMPTY_STATE);
   });
 
   it('initializes with proper value', () => {
-    expect(cityProfileReducer(undefined, {})).toEqual(EMPTY_STATE);
+    expect(cityProfileReducer(undefined, { type: 'LOGOUT_REQUEST' })).toEqual(EMPTY_STATE);
   });
 
   it('processes CITY_PROFILE_REQUEST', () => {

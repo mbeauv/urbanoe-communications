@@ -2,7 +2,12 @@
 
 import { Map } from 'immutable';
 import type { ImageGallery } from 'urbanoe-model';
-import { imageGalleriesReducer } from '../image_galleries_reducer';
+import {
+  imageGalleriesReducer,
+  selectGalleries,
+  selectGallery,
+  selectLoadingIndicator,
+} from '../image_galleries_reducer';
 
 const EMPTY_STATE = { loading: false, galleries: new Map(), error: null };
 const ERROR = { message: 'error message' };
@@ -26,6 +31,47 @@ const GALLERY_INFO_2 : ImageGallery = {
 };
 
 describe('image_galleries_reducer', () => {
+  describe('selectors', () => {
+    let state;
+
+    beforeEach(() => {
+      state = {
+        loading: false,
+        error: null,
+        galleries: Map({
+          gallery_6: {
+            loading: true,
+            error: null,
+            gallery: GALLERY_INFO_1,
+          },
+          gallery_5: {
+            loading: false,
+            error: null,
+            gallery: GALLERY_INFO_2,
+          },
+        }),
+      };
+    });
+
+    describe('selectGalleries', () => {
+      it('returns content of state', () => {
+        expect(selectGalleries(state)).toEqual([GALLERY_INFO_1, GALLERY_INFO_2]);
+      });
+    });
+
+    describe('selectGallery', () => {
+      it('returns content of state', () => {
+        expect(selectGallery(state, 5)).toEqual(GALLERY_INFO_2);
+      });
+    });
+
+    describe('selectLoadingIndicator', () => {
+      it('returns loading indicator', () => {
+        expect(selectLoadingIndicator(state, 5)).toEqual(false);
+      });
+    });
+  });
+
   describe('imageGalleriesReducer', () => {
     it('initializes with proper value', () => {
       expect(imageGalleriesReducer(undefined, { type: 'LOGOUT_REQUEST' })).toEqual(EMPTY_STATE);

@@ -18,7 +18,7 @@ export function createImageInfo(
   description: string,
 ) : ThunkAction {
   return async (dispatch) => {
-    dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_REQUEST' });
+    dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_REQUEST', galleryId });
 
     try {
       const imgUrl = url(`${imageInfoUrl(galleryId)}.json`, Map({ auth_token: authToken, use_scratch: true }));
@@ -26,9 +26,9 @@ export function createImageInfo(
         name,
         description,
       });
-      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_OK', imageInfo: response.data });
+      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_OK', galleryId, imageInfo: response.data });
     } catch (error) {
-      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_ERROR', error });
+      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_ERROR', galleryId, error });
     }
   };
 }
@@ -46,7 +46,7 @@ export function updateImageInfo(
   description: string,
 ) : ThunkAction {
   return async (dispatch) => {
-    dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_REQUEST' });
+    dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_REQUEST', galleryId, imageInfoId });
 
     try {
       const imgUrl = url(`${imageInfoUrl(galleryId)}/${imageInfoId}.json`, Map({ auth_token: authToken, use_scratch: true }));
@@ -54,9 +54,9 @@ export function updateImageInfo(
         name,
         description,
       });
-      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_RESPONSE_OK', imageInfo: response.data });
+      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_RESPONSE_OK', galleryId, imageInfo: response.data });
     } catch (error) {
-      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_RESPONSE_ERROR', error });
+      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_RESPONSE_ERROR', galleryId, imageInfoId, error });
     }
   };
 }
@@ -78,29 +78,14 @@ export function deleteImageInfo(authToken: string, galleryId: number, imageInfoI
 
 export function getImageInfos(authToken: string, galleryId: number): ThunkAction {
   return async (dispatch) => {
-    dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_REQUEST' });
+    dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_REQUEST', galleryId });
 
     try {
       const imgUrl = url(`${imageInfoUrl(galleryId)}.json`, Map({ auth_token: authToken }));
       const response = await communicator().get(imgUrl);
-      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_RESPONSE_OK', imageInfos: response.data });
+      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_RESPONSE_OK', galleryId, imageInfos: response.data });
     } catch (error) {
-      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_RESPONSE_ERROR', error });
-    }
-  };
-}
-
-export function getImageInfo(authToken: string, galleryId: number, imageInfoId: number):
-  ThunkAction {
-  return async (dispatch) => {
-    dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_REQUEST', galleryId, imageInfoId });
-
-    try {
-      const imgUrl = url(`${imageInfoUrl(galleryId)}/${imageInfoId}.json`, Map({ auth_token: authToken }));
-      const response = await communicator().get(imgUrl);
-      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_RESPONSE_OK', imageInfo: response.data });
-    } catch (error) {
-      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_RESPONSE_ERROR', error });
+      dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_RESPONSE_ERROR', galleryId, error });
     }
   };
 }

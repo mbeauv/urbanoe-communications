@@ -9,7 +9,7 @@ type ImageGalleryState = {
   +gallery: ImageGallery,
 };
 
-type State = {
+export type GalleryState = {
   loading: boolean,
   +error: ?Object,
   +galleries: Map<string, ImageGalleryState>,
@@ -23,13 +23,13 @@ const createGalleryState = (gallery: ImageGallery) : ImageGalleryState =>
 const createGalleries = (galleries : Array<ImageGallery>) : Map<string, ImageGalleryState> =>
   (Map(galleries.map(item => [galleryIndex(item.id), createGalleryState(item)])));
 
-const INITIAL_STATE : State = {
+const INITIAL_STATE : GalleryState = {
   loading: false,
   error: null,
   galleries: (new Map(): Map<string, ImageGalleryState>),
 };
 
-function mergeGallery(state: State, galleryId: number, attribs: Object) : State {
+function mergeGallery(state: GalleryState, galleryId: number, attribs: Object) : GalleryState {
   return {
     ...state,
     galleries: state.galleries.mergeDeep({
@@ -37,7 +37,10 @@ function mergeGallery(state: State, galleryId: number, attribs: Object) : State 
     }) };
 }
 
-export function imageGalleriesReducer(state: State = INITIAL_STATE, action: Action): State {
+export function imageGalleriesReducer(
+  state: GalleryState = INITIAL_STATE,
+  action: Action,
+) : GalleryState {
   switch (action.type) {
     case 'IMAGE_GALLERY_DELETE_REQUEST':
       return mergeGallery(state, action.galleryId, { loading: true, error: null });
@@ -79,3 +82,17 @@ export function imageGalleriesReducer(state: State = INITIAL_STATE, action: Acti
       return state;
   }
 }
+
+/** Selector returning all galleries in reducer */
+export const selectGalleries = (state: GalleryState) : Array<ImageGallery> => (
+  state.galleries.map(g => g.gallery).toIndexedSeq().toArray()
+);
+
+/** Selector returning gallery with given id */
+export const selectGallery = (state: GalleryState, galleryId: number) : ImageGallery => (
+  state.galleries.get(galleryIndex(galleryId)).gallery
+);
+
+export const selectLoadingIndicator = (state: GalleryState, galleryId: number) : boolean => (
+  state.galleries.get(galleryIndex(galleryId)).loading
+);

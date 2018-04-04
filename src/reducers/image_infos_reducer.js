@@ -154,3 +154,41 @@ export function imageInfosReducer(state : State = INITIAL_STATE, action : Action
       return state;
   }
 }
+
+export function selectImageInfos(
+  state: State,
+  galleryId: number,
+) : Array<ImageGalleryImageInfo> {
+  const gallery = state.galleryImages.get(galleryImageIndex(galleryId));
+  return gallery ? gallery.imageInfos.map(i => i.imageInfo).toIndexedSeq().toArray() : [];
+}
+
+export function selectImageInfoLoading(
+  state: State,
+  galleryId: number,
+  imageInfoId: number,
+) : boolean {
+  const gallery = state.galleryImages.get(galleryImageIndex(galleryId));
+  if (gallery) {
+    const imageInfo = gallery.imageInfos.get(imageIndex(imageInfoId));
+    if (imageInfo) {
+      return imageInfo.loading;
+    }
+  }
+  return false;
+}
+
+export function selectImageInfo(
+  state: State,
+  galleryId: number,
+  imageInfoId: number,
+) : ?ImageGalleryImageInfo {
+  const gallery = state.galleryImages.get(galleryImageIndex(galleryId));
+  if (gallery) {
+    const imageInfo = gallery.imageInfos.get(imageIndex(imageInfoId));
+    if (imageInfo) {
+      return imageInfo.imageInfo;
+    }
+  }
+  return null;
+}
