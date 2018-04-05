@@ -1,8 +1,8 @@
 // @flow
 
 import { Map } from 'immutable';
-import { communicator, url } from '../common';
-import type { ThunkAction } from './types';
+import { communicator, url } from '../../common';
+import type { MediaGalleryThunkAction } from './types';
 
 /**
  * Creates an asynchronous action to update an existing image gallery.
@@ -12,7 +12,7 @@ export function updateImageGallery(
   galleryId: number,
   name: string,
   description: string,
-): ThunkAction {
+): MediaGalleryThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'IMAGE_GALLERY_UPDATE_REQUEST', galleryId });
 
@@ -36,7 +36,7 @@ export function createImageGallery(
   authToken: string,
   galleryName: string,
   galleryDescription: string,
-): ThunkAction {
+): MediaGalleryThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'IMAGE_GALLERY_CREATE_REQUEST', galleryName, galleryDescription });
 
@@ -56,7 +56,7 @@ export function createImageGallery(
 /**
  * Creates an asynchronous action to delete an existing image gallery.
  */
-export function deleteImageGallery(authToken: string, galleryId: number): ThunkAction {
+export function deleteImageGallery(authToken: string, galleryId: number): MediaGalleryThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'IMAGE_GALLERY_DELETE_REQUEST', galleryId });
 
@@ -73,7 +73,7 @@ export function deleteImageGallery(authToken: string, galleryId: number): ThunkA
 /**
  * Returns an asynchronous action to retrieve the details of a given issue.
  */
-export function getImageGalleries(authToken: string): ThunkAction {
+export function getImageGalleries(authToken: string): MediaGalleryThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'IMAGE_GALLERY_LIST_REQUEST' });
 

@@ -3,7 +3,7 @@
 import { Map } from 'immutable';
 import _ from 'lodash';
 import type { ImageGalleryImageInfo } from 'urbanoe-model';
-import type { Action } from '../actions/types';
+import type { MediaGalleryAction } from '../actions/types';
 
 /** Information about one particular image. */
 type ImageInfoState = {
@@ -107,7 +107,10 @@ function mergeGalleryImages(
   };
 }
 
-export function imageInfosReducer(state : State = INITIAL_STATE, action : Action) : State {
+export function imageInfosReducer(
+  state : State = INITIAL_STATE,
+  action : MediaGalleryAction,
+) : State {
   switch (action.type) {
     case 'IMAGE_GALLERY_IMAGE_INFO_LIST_REQUEST':
       return mergeGallery(state, action.galleryId, {

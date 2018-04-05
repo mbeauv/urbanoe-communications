@@ -86,12 +86,12 @@ describe('image_galleries_reducer', () => {
 
   describe('imageGalleriesReducer', () => {
     it('initializes with proper value', () => {
-      expect(imageGalleriesReducer(undefined, { type: 'LOGOUT_REQUEST' })).toEqual(EMPTY_STATE);
+      expect(imageGalleriesReducer(undefined, { type: 'IMAGE_GALLERY_SCRATCH_REINIT_LOCAL' })).toEqual(EMPTY_STATE);
     });
 
     describe('when state is empty', () => {
       it('processes unsupported action type', () => {
-        expect(imageGalleriesReducer(EMPTY_STATE, { type: 'LOGOUT_REQUEST' }))
+        expect(imageGalleriesReducer(EMPTY_STATE, { type: 'IMAGE_GALLERY_SCRATCH_REINIT_LOCAL' }))
           .toEqual(EMPTY_STATE);
       });
 

@@ -1,7 +1,7 @@
 // @flow
 import { Map } from 'immutable';
 import type { ImageGallery } from 'urbanoe-model';
-import type { Action } from '../actions';
+import type { MediaGalleryAction } from '../actions/types';
 
 type ImageGalleryState = {
   +loading: boolean,
@@ -39,7 +39,7 @@ function mergeGallery(state: GalleryState, galleryId: number, attribs: Object) :
 
 export function imageGalleriesReducer(
   state: GalleryState = INITIAL_STATE,
-  action: Action,
+  action: MediaGalleryAction,
 ) : GalleryState {
   switch (action.type) {
     case 'IMAGE_GALLERY_DELETE_REQUEST':

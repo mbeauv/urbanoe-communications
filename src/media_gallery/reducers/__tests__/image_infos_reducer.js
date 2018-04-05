@@ -104,12 +104,12 @@ describe('image_infos_reducer', () => {
 
   describe('imageInfosReducer', () => {
     it('initializes with proper value', () => {
-      expect(imageInfosReducer(undefined, { type: 'LOGOUT_REQUEST' })).toEqual(EMPTY_STATE);
+      expect(imageInfosReducer(undefined, { type: 'IMAGE_GALLERY_SCRATCH_REINIT_LOCAL' })).toEqual(EMPTY_STATE);
     });
 
     describe('when state is empty', () => {
       it('does not update unsupported type', () => {
-        expect(imageInfosReducer(EMPTY_STATE, { type: 'LOGOUT_REQUEST' })).toEqual(EMPTY_STATE);
+        expect(imageInfosReducer(EMPTY_STATE, { type: 'IMAGE_GALLERY_SCRATCH_REINIT_LOCAL' })).toEqual(EMPTY_STATE);
       });
 
       it('processes IMAGE_GALLERY_IMAGE_INFO_CREATE_REQUEST', () => {

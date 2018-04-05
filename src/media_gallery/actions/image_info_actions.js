@@ -1,8 +1,8 @@
 // @flow
 
 import { Map } from 'immutable';
-import type { ThunkAction } from './types';
-import { communicator, url } from '../common';
+import type { MediaGalleryThunkAction } from './types';
+import { communicator, url } from '../../common';
 
 const imageInfoUrl = galleryId => `/media_gallery/galleries/${galleryId}/image_infos`;
 
@@ -16,7 +16,7 @@ export function createImageInfo(
   galleryId: number,
   name: string,
   description: string,
-) : ThunkAction {
+) : MediaGalleryThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_REQUEST', galleryId });
 
@@ -44,7 +44,7 @@ export function updateImageInfo(
   imageInfoId: number,
   name: string,
   description: string,
-) : ThunkAction {
+) : MediaGalleryThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_REQUEST', galleryId, imageInfoId });
 
@@ -62,7 +62,7 @@ export function updateImageInfo(
 }
 
 export function deleteImageInfo(authToken: string, galleryId: number, imageInfoId: number):
-  ThunkAction {
+  MediaGalleryThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_DELETE_REQUEST', galleryId, imageInfoId });
 
@@ -76,7 +76,7 @@ export function deleteImageInfo(authToken: string, galleryId: number, imageInfoI
   };
 }
 
-export function getImageInfos(authToken: string, galleryId: number): ThunkAction {
+export function getImageInfos(authToken: string, galleryId: number): MediaGalleryThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_REQUEST', galleryId });
 

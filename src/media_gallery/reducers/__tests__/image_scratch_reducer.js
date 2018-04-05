@@ -1,6 +1,6 @@
 // @flow
 import type { ImageScratchDetails } from 'urbanoe-model';
-import type { Action } from '../../actions';
+import type { MediaGalleryAction } from '../../actions/types';
 import { imageScratchReducer } from '../image_scratch_reducer';
 
 const INITIAL_STATE = {
@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   imageScratch: null,
 };
 
-const CREATE_REQUEST : Action = {
+const CREATE_REQUEST : MediaGalleryAction = {
   type: 'IMAGE_GALLERY_SCRATCH_CREATE_REQUEST',
 };
 
@@ -22,11 +22,11 @@ const VALID_SCRATCH : ImageScratchDetails = {
 describe('image_scratch_reducer', () => {
   describe('imageScratchReducer', () => {
     it('initializes with proper value', () => {
-      expect(imageScratchReducer(undefined, { type: 'LOGOUT_REQUEST' })).toEqual(INITIAL_STATE);
+      expect(imageScratchReducer(undefined, { type: 'IMAGE_GALLERY_SCRATCH_REINIT_LOCAL' })).toEqual(INITIAL_STATE);
     });
 
     it('returns current state if unsupported action', () => {
-      expect(imageScratchReducer(INITIAL_STATE, { type: 'LOGOUT_REQUEST' })).toEqual(INITIAL_STATE);
+      expect(imageScratchReducer(INITIAL_STATE, { type: 'IMAGE_GALLERY_SCRATCH_REINIT_LOCAL' })).toEqual(INITIAL_STATE);
     });
 
     it('processes IMAGE_GALLERY_SCRATCH_REINIT_LOCAL', () => {

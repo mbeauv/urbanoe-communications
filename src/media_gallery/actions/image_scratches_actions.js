@@ -1,16 +1,16 @@
 // @flow
 
 import { Map } from 'immutable';
-import type { ThunkAction, Action } from './types';
-import { communicator, url } from '../common';
+import type { MediaGalleryThunkAction, MediaGalleryAction } from './types';
+import { communicator, url } from '../../common';
 
 const scratchUrl = (authToken : string) => url('/media_gallery/image_scratches.json', Map({ auth_token: authToken }));
 
-export function clearLocalScratch() : Action {
+export function clearLocalScratch() : MediaGalleryAction {
   return { type: 'IMAGE_GALLERY_SCRATCH_REINIT_LOCAL' };
 }
 
-export function createImageScratch(authToken: string, image: string) : ThunkAction {
+export function createImageScratch(authToken: string, image: string) : MediaGalleryThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'IMAGE_GALLERY_SCRATCH_CREATE_REQUEST' });
     try {
@@ -26,7 +26,7 @@ export function createImageScratch(authToken: string, image: string) : ThunkActi
   };
 }
 
-export function deleteImageScratch(authToken: string) : ThunkAction {
+export function deleteImageScratch(authToken: string) : MediaGalleryThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'IMAGE_GALLERY_SCRATCH_DELETE_REQUEST' });
 

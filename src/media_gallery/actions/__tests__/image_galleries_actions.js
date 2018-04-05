@@ -4,7 +4,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { setCommunicatorInstance } from '../../common';
+import { setCommunicatorInstance } from '../../../common';
 import {
   getImageGalleries,
   createImageGallery,

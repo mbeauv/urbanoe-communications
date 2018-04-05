@@ -1,6 +1,6 @@
 // @flow
 import type { ImageScratchDetails } from 'urbanoe-model';
-import type { Action } from '../actions/types';
+import type { MediaGalleryAction } from '../actions/types';
 
 type State = {
   +loading: bool,
@@ -14,7 +14,10 @@ const INITIAL_STATE = {
   imageScratch: null,
 };
 
-export function imageScratchReducer(state: State = INITIAL_STATE, action: Action) : State {
+export function imageScratchReducer(
+  state: State = INITIAL_STATE,
+  action: MediaGalleryAction,
+) : State {
   switch (action.type) {
     case 'IMAGE_GALLERY_SCRATCH_REINIT_LOCAL':
       return INITIAL_STATE;
