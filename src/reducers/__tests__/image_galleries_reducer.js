@@ -60,14 +60,26 @@ describe('image_galleries_reducer', () => {
     });
 
     describe('selectGallery', () => {
-      it('returns content of state', () => {
+      it('returns gallery if it exists', () => {
         expect(selectGallery(state, 5)).toEqual(GALLERY_INFO_2);
+      });
+
+      it('returns null if it does not exist', () => {
+        expect(selectGallery(state, 52)).toEqual(null);
       });
     });
 
     describe('selectLoadingIndicator', () => {
-      it('returns loading indicator', () => {
+      it('returns true when gallery is loading', () => {
+        expect(selectLoadingIndicator(state, 6)).toEqual(true);
+      });
+
+      it('returns false when gallery is not loading', () => {
         expect(selectLoadingIndicator(state, 5)).toEqual(false);
+      });
+
+      it('returns false when gallery does not exist', () => {
+        expect(selectLoadingIndicator(state, 25)).toEqual(false);
       });
     });
   });

@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { setCommunicatorInstance } from '../../common';
-import { getImageInfo, getImageInfos, deleteImageInfo } from '../image_info_actions';
+import { getImageInfos, deleteImageInfo } from '../image_info_actions';
 
 const AUTH_TOKEN = 'blbla';
 const GALLERY1_ID = 43;

@@ -33,70 +33,72 @@ const IMAGE_INFO_2 : ImageGalleryImageInfo = {
 };
 
 describe('image_infos_reducer', () => {
-  let startState;
+  describe('selectors', () => {
+    let startState;
 
-  beforeEach(() => {
-    startState = {
-      galleryImages: Map({
-        gallery_23: {
-          loading: false,
-          error: null,
-          imageInfos: Map({
-            image_22: {
-              loading: false,
-              error: null,
-              imageInfo: IMAGE_INFO_1,
-            },
-            image_18: {
-              loading: true,
-              error: null,
-              imageInfo: IMAGE_INFO_2,
-            },
-          }),
-        },
-      }),
-    };
-  });
-
-  describe('selectImageInfoLoading', () => {
-    it('returns true when loading is true', () => {
-      expect(selectImageInfoLoading(startState, 23, 18)).toEqual(true);
+    beforeEach(() => {
+      startState = {
+        galleryImages: Map({
+          gallery_23: {
+            loading: false,
+            error: null,
+            imageInfos: Map({
+              image_22: {
+                loading: false,
+                error: null,
+                imageInfo: IMAGE_INFO_1,
+              },
+              image_18: {
+                loading: true,
+                error: null,
+                imageInfo: IMAGE_INFO_2,
+              },
+            }),
+          },
+        }),
+      };
     });
 
-    it('returns false if loading is false', () => {
-      expect(selectImageInfoLoading(startState, 23, 22)).toEqual(false);
+    describe('selectImageInfoLoading', () => {
+      it('returns true when loading is true', () => {
+        expect(selectImageInfoLoading(startState, 23, 18)).toEqual(true);
+      });
+
+      it('returns false if loading is false', () => {
+        expect(selectImageInfoLoading(startState, 23, 22)).toEqual(false);
+      });
+
+      it('returns false if image not found', () => {
+        expect(selectImageInfoLoading(startState, 23, 25)).toEqual(false);
+      });
+
+      it('returns false if gallery not found', () => {
+        expect(selectImageInfoLoading(startState, 23, 12)).toEqual(false);
+      });
     });
 
-    it('returns false if image not found', () => {
-      expect(selectImageInfoLoading(startState, 23, 25)).toEqual(false);
+    describe('selectImageInfo', () => {
+      it('returns imageInfo when present', () => {
+        expect(selectImageInfo(startState, 23, 22)).toEqual(IMAGE_INFO_1);
+      });
+
+      it('returns null if gallery not found', () => {
+        expect(selectImageInfo(startState, 25, 22)).toEqual(null);
+      });
+
+      it('returns null if image not found', () => {
+        expect(selectImageInfo(startState, 23, 25)).toEqual(null);
+      });
     });
 
-    it('returns false if gallery not found', () => {
-      expect(selectImageInfoLoading(startState, 23, 12)).toEqual(false);
-    });
-  });
+    describe('selectImageInfos', () => {
+      it('returns all of the image infos for existing gallery', () => {
+        expect(selectImageInfos(startState, 23)).toEqual([IMAGE_INFO_1, IMAGE_INFO_2]);
+      });
 
-  describe('selectImageInfo', () => {
-    it('returns imageInfo when present', () => {
-      expect(selectImageInfo(startState, 23, 22)).toEqual(IMAGE_INFO_1);
-    });
-
-    it('returns null if gallery not found', () => {
-      expect(selectImageInfo(startState, 25, 22)).toEqual(null);
-    });
-
-    it('returns null if image not found', () => {
-      expect(selectImageInfo(startState, 23, 25)).toEqual(null);
-    });
-  });
-
-  describe('selectImageInfos', () => {
-    it('returns all of the image infos for existing gallery', () => {
-      expect(selectImageInfos(startState, 23)).toEqual([IMAGE_INFO_1, IMAGE_INFO_2]);
-    });
-
-    it('returns empty when gallery not found', () => {
-      expect(selectImageInfos(startState, 38)).toEqual([]);
+      it('returns empty when gallery not found', () => {
+        expect(selectImageInfos(startState, 38)).toEqual([]);
+      });
     });
   });
 

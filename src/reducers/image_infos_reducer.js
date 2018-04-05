@@ -29,6 +29,15 @@ const galleryImageIndex = (galleryId: number) : string => `gallery_${galleryId}`
 
 const imageIndex = (imageId: number) => `image_${imageId}`;
 
+function getGalleryImageInfo(
+  state: State,
+  galleryId: number,
+  imageInfoId: number,
+) : ?ImageInfoState {
+  const gallery = state.galleryImages.get(galleryImageIndex(galleryId));
+  return gallery ? gallery.imageInfos.get(imageIndex(imageInfoId)) : null;
+}
+
 const INITIAL_STATE = { galleryImages: new Map() };
 
 function processGalleryListResponseOk(
@@ -54,11 +63,18 @@ function processDeleteOk(
   galleryId: number,
   imageInfoId: number,
 ) : State {
-  const galleryImageState = state.galleryImages.get(galleryImageIndex(galleryId));
-  galleryImageState.imageInfos = galleryImageState.imageInfos.delete(imageIndex(imageInfoId));
-  if (galleryImageState.imageInfos.length === 0) {
-    state.galleryImages.delete(galleryImageIndex(galleryId));
+  const galleryIndex = galleryImageIndex(galleryId);
+  const galleryImageState = state.galleryImages.get(galleryIndex);
+
+  if (galleryImageState) {
+    const imageInfos = galleryImageState.imageInfos.delete(imageIndex(imageInfoId));
+    const newGalleryImageState = { ...galleryImageState, imageInfos };
+    return {
+      ...state,
+      galleryImages: state.galleryImages.set(galleryIndex, newGalleryImageState),
+    };
   }
+
   return state;
 }
 
@@ -183,12 +199,6 @@ export function selectImageInfo(
   galleryId: number,
   imageInfoId: number,
 ) : ?ImageGalleryImageInfo {
-  const gallery = state.galleryImages.get(galleryImageIndex(galleryId));
-  if (gallery) {
-    const imageInfo = gallery.imageInfos.get(imageIndex(imageInfoId));
-    if (imageInfo) {
-      return imageInfo.imageInfo;
-    }
-  }
-  return null;
+  const info = getGalleryImageInfo(state, galleryId, imageInfoId);
+  return info ? info.imageInfo : null;
 }

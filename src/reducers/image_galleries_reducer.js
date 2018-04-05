@@ -89,10 +89,12 @@ export const selectGalleries = (state: GalleryState) : Array<ImageGallery> => (
 );
 
 /** Selector returning gallery with given id */
-export const selectGallery = (state: GalleryState, galleryId: number) : ImageGallery => (
-  state.galleries.get(galleryIndex(galleryId)).gallery
-);
+export const selectGallery = (state: GalleryState, galleryId: number) : ?ImageGallery => {
+  const gallery = state.galleries.get(galleryIndex(galleryId));
+  return gallery ? gallery.gallery : null;
+};
 
-export const selectLoadingIndicator = (state: GalleryState, galleryId: number) : boolean => (
-  state.galleries.get(galleryIndex(galleryId)).loading
-);
+export const selectLoadingIndicator = (state: GalleryState, galleryId: number) : boolean => {
+  const gallery = state.galleries.get(galleryIndex(galleryId));
+  return gallery ? gallery.loading : false;
+};
