@@ -1,6 +1,6 @@
 {
   "name": "urbanoe-communications",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Contains interfaces and Redux constructs to query the Urbanoe platform.",
   "main": "dist/index.js",
   "repository": {
