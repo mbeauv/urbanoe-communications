@@ -1,3 +1,5 @@
+// @flow
+
 import { communicator } from '../common';
 import type { ThunkAction } from './types';
 
@@ -11,7 +13,7 @@ export function getSelectedUserProfile(userId: number): ThunkAction {
     try {
       const userUrl = `end_users/${userId}.json`;
       const response = await communicator().get(userUrl);
-      dispatch({ type: 'SELECTED_USER_PROFILE_RESPONSE_OK', userId, userProfile: response.data });
+      dispatch({ type: 'SELECTED_USER_PROFILE_RESPONSE_OK', userProfile: response.data });
     } catch (error) {
       dispatch({ type: 'SELECTED_USER_PROFILE_RESPONSE_ERROR', userId, error });
     }

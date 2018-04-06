@@ -40,10 +40,10 @@ export type Action =
   | { type: 'CITY_STATISTICS_RESPONSE_OK', cityId: number, statsType: string, chart: PieChartData }
   | { type: 'CITY_STATISTICS_RESPONSE_ERROR', cityId: number, statsType: string, error: Object }
   | { type: 'ISSUE_DETAILS_REQUEST', issueId: number }
-  | { type: 'ISSUE_DETAILS_RESPONSE_OK', issueId: number, issueDetails: IssueDetailsData }
+  | { type: 'ISSUE_DETAILS_RESPONSE_OK', issueDetails: IssueDetailsData }
   | { type: 'ISSUE_DETAILS_RESPONSE_ERROR', issueId: number, error: Object }
   | { type: 'SELECTED_USER_PROFILE_REQUEST', userId: number }
-  | { type: 'SELECTED_USER_PROFILE_RESPONSE_OK', userId: number, userProfile: UserProfileData }
+  | { type: 'SELECTED_USER_PROFILE_RESPONSE_OK', userProfile: UserProfileData }
   | { type: 'SELECTED_USER_PROFILE_RESPONSE_ERROR', userId: number, error: Object };
 
 /** Typed promise for action */

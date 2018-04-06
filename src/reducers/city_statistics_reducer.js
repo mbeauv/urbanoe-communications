@@ -1,4 +1,5 @@
 // @flow
+
 import type { PieChartData } from 'urbanoe-model';
 import type { Action } from '../actions/types';
 

@@ -13,7 +13,7 @@ export function getIssueDetails(issueId: number): ThunkAction {
     try {
       const url = `/issues/${issueId}.json`;
       const response = await communicator().get(url);
-      dispatch({ type: 'ISSUE_DETAILS_RESPONSE_OK', issueId, issueDetails: response.data });
+      dispatch({ type: 'ISSUE_DETAILS_RESPONSE_OK', issueDetails: response.data });
     } catch (error) {
       dispatch({ type: 'ISSUE_DETAILS_RESPONSE_ERROR', issueId, error });
     }

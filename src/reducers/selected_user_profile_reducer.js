@@ -1,4 +1,5 @@
 // @flow
+
 import type { UserProfileData } from 'urbanoe-model';
 import type { Action } from '../actions/types';
 

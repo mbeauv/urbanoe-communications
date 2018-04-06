@@ -24,7 +24,7 @@ describe('issue_details_actions', () => {
 
       const expectedActions = [
         { type: 'ISSUE_DETAILS_REQUEST', issueId: TEST_ISSUE_ID },
-        { type: 'ISSUE_DETAILS_RESPONSE_OK', issueId: 4, issueDetails: { id: 4 } },
+        { type: 'ISSUE_DETAILS_RESPONSE_OK', issueDetails: { id: 4 } },
       ];
 
       const store = mockStore({ todos: [] });

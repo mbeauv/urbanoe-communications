@@ -1,3 +1,5 @@
+// @flow
+
 import { Map } from 'immutable';
 import { url } from '../url';
 

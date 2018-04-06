@@ -24,7 +24,7 @@ describe('user_profile_actions', () => {
 
       const expectedActions = [
         { type: 'SELECTED_USER_PROFILE_REQUEST', userId: TEST_USER_ID },
-        { type: 'SELECTED_USER_PROFILE_RESPONSE_OK', userId: 4, userProfile: { id: TEST_USER_ID } },
+        { type: 'SELECTED_USER_PROFILE_RESPONSE_OK', userProfile: { id: TEST_USER_ID } },
       ];
 
       const store = mockStore({ todos: [] });
