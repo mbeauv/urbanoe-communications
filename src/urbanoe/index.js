@@ -1,3 +1,5 @@
+export * from './models';
+
 export * from './city/reducers/city_issues_reducer';
 export * from './city/reducers/city_news_reducer';
 export * from './city/reducers/city_profile_reducer';

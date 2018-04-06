@@ -9,7 +9,7 @@ import type {
   PieChartData,
   UserProfileData,
   LoginInfo,
-} from 'urbanoe-model';
+} from './models';
 
 /**
  * List of all recognized React Redux actions that can be performed with
@@ -56,4 +56,4 @@ export type GetState = () => Object;
 export type Dispatch = (action: UrbanoeAction | UrbanoePromiseAction | Array<UrbanoeAction>) => any;
 
 /** Represents a thunk promise, see redux-thunk */
-export type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
+export type UrbanoeThunkAction = (dispatch: Dispatch, getState: GetState) => any;

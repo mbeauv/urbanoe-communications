@@ -4,7 +4,7 @@ import type {
   ImageGallery,
   ImageGalleryImageInfo,
   ImageScratchDetails,
-} from 'urbanoe-model';
+} from '../models';
 
 /**
  * List of all recognized React Redux actions that can be performed with

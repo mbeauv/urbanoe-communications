@@ -2,13 +2,13 @@
 
 import { Map } from 'immutable';
 import { communicator, url } from '../../../common';
-import type { ThunkAction } from '../../types';
+import type { UrbanoeThunkAction } from '../../types';
 
 /**
  * Returns an asynchronous action to retrieves a statistics object for
  * given city id.
  */
-export function getCityStatistics(cityId: number, statsType: string): ThunkAction {
+export function getCityStatistics(cityId: number, statsType: string): UrbanoeThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'CITY_STATISTICS_REQUEST', cityId, statsType });
 

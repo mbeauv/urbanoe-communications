@@ -1,13 +1,13 @@
 // @flow
 
 import { communicator, url } from '../../../common';
-import type { ThunkAction } from '../../types';
+import type { UrbanoeThunkAction } from '../../types';
 
 /**
  * Returns an asynchronous action to retrieve the profile of the city
  * specified by the cityId value.
  */
-export function getCityProfile(cityId: number): ThunkAction {
+export function getCityProfile(cityId: number): UrbanoeThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'CITY_PROFILE_REQUEST', cityId });
 

@@ -1,12 +1,12 @@
 // @flow
 
 import { communicator } from '../../../common';
-import type { ThunkAction } from '../../types';
+import type { UrbanoeThunkAction } from '../../types';
 
 /**
  * Returns an asynchronous action to retrieve the details of a given issue.
  */
-export function getIssueDetails(issueId: number): ThunkAction {
+export function getIssueDetails(issueId: number): UrbanoeThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'ISSUE_DETAILS_REQUEST', issueId });
 

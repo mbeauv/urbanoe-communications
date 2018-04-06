@@ -2,12 +2,12 @@
 
 import { Map } from 'immutable';
 import { communicator, url } from '../../../common';
-import type { ThunkAction } from '../../types';
+import type { UrbanoeThunkAction } from '../../types';
 
 /**
  * Returns an asynchronous action to retrieve a page of news from the server.
  */
-export function getCityNews(cityId: number, pageId: number): ThunkAction {
+export function getCityNews(cityId: number, pageId: number): UrbanoeThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'CITY_NEWS_PAGE_REQUEST', cityId, pageId });
 

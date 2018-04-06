@@ -1,6 +1,6 @@
 // @flow
 
-import type { CityProfile } from 'urbanoe-model';
+import type { CityProfile } from '../../models';
 import type { UrbanoeAction } from '../../types';
 
 type State = {

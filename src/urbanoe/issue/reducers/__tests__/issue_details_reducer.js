@@ -1,6 +1,6 @@
 // @flow
 
-import type { IssueDetailsData } from 'urbanoe-model';
+import type { IssueDetailsData } from '../../../models';
 import { issueDetailsReducer } from '../issue_details_reducer';
 
 const EMPTY_STATE = { loading: false, error: null, issueDetails: null };

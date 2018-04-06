@@ -1,6 +1,6 @@
 // @flow
 
-import type { CityNews } from 'urbanoe-model';
+import type { CityNews } from '../../../models';
 import { cityNewsReducer } from '../city_news_reducer';
 
 const NEWS_1 : CityNews = {

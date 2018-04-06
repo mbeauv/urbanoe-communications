@@ -1,7 +1,7 @@
 // @flow
 
-import type { IssueSummaryData, CityIssuesFilterData } from 'urbanoe-model';
-import { createDefaultFilter } from 'urbanoe-model';
+import type { IssueSummaryData, CityIssuesFilterData } from '../../models';
+import { createDefaultFilter } from '../../models';
 import type { UrbanoeAction } from '../../types';
 
 type State = {

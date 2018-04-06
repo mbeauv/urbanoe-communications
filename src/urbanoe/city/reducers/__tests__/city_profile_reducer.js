@@ -1,6 +1,6 @@
 // @flow
 
-import type { CityProfile } from 'urbanoe-model';
+import type { CityProfile } from '../../../models';
 import { cityProfileReducer } from '../city_profile_reducer';
 
 const TEST_CITY_ID = 5;

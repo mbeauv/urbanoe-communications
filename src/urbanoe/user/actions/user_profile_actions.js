@@ -1,12 +1,12 @@
 // @flow
 
 import { communicator } from '../../../common';
-import type { ThunkAction } from '../../types';
+import type { UrbanoeThunkAction } from '../../types';
 
 /**
  * Returns an asynchronous action to retrieve a given user's profile.
  */
-export function getSelectedUserProfile(userId: number): ThunkAction {
+export function getSelectedUserProfile(userId: number): UrbanoeThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'SELECTED_USER_PROFILE_REQUEST', userId });
 

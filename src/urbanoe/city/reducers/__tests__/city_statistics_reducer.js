@@ -1,6 +1,6 @@
 // @flow
 
-import type { PieChartData } from 'urbanoe-model';
+import type { PieChartData } from '../../../models';
 import { cityStatisticsReducer } from '../city_statistics_reducer';
 
 const TEST_STATS_TYPE = 'pie';

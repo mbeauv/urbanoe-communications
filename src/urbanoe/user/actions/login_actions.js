@@ -1,13 +1,13 @@
 // @flow
 
 import { communicator } from '../../../common';
-import type { ThunkAction } from '../../types';
+import type { UrbanoeThunkAction } from '../../types';
 
 /**
  * Returns an asynchronous action to logout of the platform.  At the present
  * time, it does not actually make a call to the server, just clears the token.
  */
-export function doLogout() : ThunkAction {
+export function doLogout() : UrbanoeThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'LOGOUT_REQUEST' });
     dispatch({ type: 'LOGOUT_RESPONSE_OK' });
@@ -20,7 +20,7 @@ export function doLogout() : ThunkAction {
 export function doLogin(
   userName: string,
   password: string,
-): ThunkAction {
+): UrbanoeThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'LOGIN_REQUEST' });
 

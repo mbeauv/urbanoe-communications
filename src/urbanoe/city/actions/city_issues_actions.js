@@ -2,9 +2,9 @@
 
 import _ from 'lodash';
 import { Map } from 'immutable';
-import type { CityIssuesFilterData } from 'urbanoe-model';
+import type { CityIssuesFilterData } from '../../models';
 import { communicator, url } from '../../../common';
-import type { ThunkAction } from '../../types';
+import type { UrbanoeThunkAction } from '../../types';
 
 function constructStatusFilter(filter: CityIssuesFilterData) {
   const { fixed, notFixed } = filter.statuses;
@@ -33,7 +33,7 @@ export function getCityIssuesNextPage(
   cityId: number,
   filter: CityIssuesFilterData,
   pageId: number,
-): ThunkAction {
+): UrbanoeThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'CITY_ISSUES_NEXT_PAGE_REQUEST', cityId, pageId, filter });
 
@@ -53,7 +53,7 @@ export function getCityIssuesNextPage(
 export function getCityIssuesFirstPage(
   cityId: number,
   filter: CityIssuesFilterData,
-): ThunkAction {
+): UrbanoeThunkAction {
   return async (dispatch) => {
     dispatch({ type: 'CITY_ISSUES_FIRST_PAGE_REQUEST', cityId, filter });
 

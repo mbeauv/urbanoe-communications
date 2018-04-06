@@ -1,6 +1,6 @@
 // @flow
 
-import type { UserProfileData } from 'urbanoe-model';
+import type { UserProfileData } from '../../../models';
 import { selectedUserProfileReducer } from '../selected_user_profile_reducer';
 
 const EMPTY_STATE = { loading: false, error: null, userProfile: null };

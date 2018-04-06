@@ -1,6 +1,6 @@
 // @flow
 
-import type { PieChartData } from 'urbanoe-model';
+import type { PieChartData } from '../../models';
 import type { UrbanoeAction } from '../../types';
 
 export type StatReportState = {

@@ -1,6 +1,6 @@
 // @flow
 
-import type { IssueSummaryData } from 'urbanoe-model';
+import type { IssueSummaryData } from '../../../models';
 import { cityIssuesReducer } from '../city_issues_reducer';
 
 const TEST_CITY_ID = 5;
