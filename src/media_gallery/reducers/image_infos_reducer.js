@@ -2,7 +2,7 @@
 
 import { Map } from 'immutable';
 import _ from 'lodash';
-import type { ImageGalleryImageInfo } from 'urbanoe-model';
+import type { ImageGalleryImageInfo } from '../models/ImageGalleryImageInfo';
 import type { MediaGalleryAction } from '../actions/types';
 
 /** Information about one particular image. */

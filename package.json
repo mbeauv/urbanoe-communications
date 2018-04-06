@@ -50,6 +50,6 @@
     "immutable": "4.0.0-rc.9",
     "lodash": "^4.17.4",
     "redux-thunk": "^2.2.0",
-    "urbanoe-model": "git+https://github.com/mbeauv/urbanoe-model.git"
+    "urbanoe-model": "file:../urbanoe-model"
   }
 }

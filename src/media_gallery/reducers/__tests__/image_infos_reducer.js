@@ -1,7 +1,7 @@
 // @flow
 
 import { Map } from 'immutable';
-import type { ImageGalleryImageInfo } from 'urbanoe-model';
+import type { ImageGalleryImageInfo } from '../../models/ImageGalleryImageInfo';
 import {
   imageInfosReducer,
   selectImageInfos,

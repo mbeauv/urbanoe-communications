@@ -1,6 +1,6 @@
 // @flow
 import { Map } from 'immutable';
-import type { ImageGallery } from 'urbanoe-model';
+import type { ImageGallery } from '../models/ImageGallery';
 import type { MediaGalleryAction } from '../actions/types';
 
 type ImageGalleryState = {

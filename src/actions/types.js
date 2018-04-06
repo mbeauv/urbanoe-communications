@@ -9,9 +9,6 @@ import type {
   PieChartData,
   UserProfileData,
   LoginInfo,
-  ImageGallery,
-  ImageGalleryImageInfo,
-  ImageScratchDetails,
 } from 'urbanoe-model';
 
 /**
@@ -42,40 +39,6 @@ export type Action =
   | { type: 'CITY_STATISTICS_REQUEST', cityId: number, statsType: string }
   | { type: 'CITY_STATISTICS_RESPONSE_OK', cityId: number, statsType: string, chart: PieChartData }
   | { type: 'CITY_STATISTICS_RESPONSE_ERROR', cityId: number, statsType: string, error: Object }
-  | { type: 'IMAGE_GALLERY_LIST_REQUEST' }
-  | { type: 'IMAGE_GALLERY_LIST_RESPONSE_OK', galleries: Array<ImageGallery> }
-  | { type: 'IMAGE_GALLERY_LIST_RESPONSE_ERROR', error: Object }
-  | { type: 'IMAGE_GALLERY_CREATE_REQUEST' }
-  | { type: 'IMAGE_GALLERY_CREATE_RESPONSE_OK', gallery: ImageGallery }
-  | { type: 'IMAGE_GALLERY_CREATE_RESPONSE_ERROR', error: Object }
-  | { type: 'IMAGE_GALLERY_UPDATE_REQUEST', galleryId: number }
-  | { type: 'IMAGE_GALLERY_UPDATE_RESPONSE_OK', gallery: ImageGallery }
-  | { type: 'IMAGE_GALLERY_UPDATE_RESPONSE_ERROR', galleryId: number, error: Object }
-  | { type: 'IMAGE_GALLERY_DELETE_REQUEST', galleryId: number }
-  | { type: 'IMAGE_GALLERY_DELETE_RESPONSE_OK', galleryId: number }
-  | { type: 'IMAGE_GALLERY_DELETE_RESPONSE_ERROR', galleryId: number, error: Object }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_REQUEST', galleryId: number }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_RESPONSE_OK', galleryId: number, imageInfos: Array<ImageGalleryImageInfo> }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_LIST_RESPONSE_ERROR', galleryId: number, error: Object }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_REQUEST', galleryId: number }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_OK', galleryId: number, imageInfo: ImageGalleryImageInfo }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_ERROR', galleryId: number, error: Object }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_REQUEST', galleryId: number, imageInfoId: number }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_RESPONSE_OK', galleryId: number, imageInfo: ImageGalleryImageInfo }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_RESPONSE_ERROR', galleryId: number, imageInfoId: number, error: Object }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_DELETE_REQUEST', galleryId: number, imageInfoId: number }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_DELETE_RESPONSE_OK', galleryId: number, imageInfoId: number }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_DELETE_RESPONSE_ERROR', galleryId: number, imageInfoId: number, error: Object }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_REQUEST' }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_RESPONSE_OK', imageInfo: ImageGalleryImageInfo }
-  | { type: 'IMAGE_GALLERY_IMAGE_INFO_SELECTION_RESPONSE_ERROR', error: Object}
-  | { type: 'IMAGE_GALLERY_SCRATCH_CREATE_REQUEST' }
-  | { type: 'IMAGE_GALLERY_SCRATCH_CREATE_RESPONSE_OK', scratchImage: ImageScratchDetails }
-  | { type: 'IMAGE_GALLERY_SCRATCH_CREATE_RESPONSE_ERROR', error: Object }
-  | { type: 'IMAGE_GALLERY_SCRATCH_DELETE_REQUEST' }
-  | { type: 'IMAGE_GALLERY_SCRATCH_DELETE_RESPONSE_OK' }
-  | { type: 'IMAGE_GALLERY_SCRATCH_DELETE_RESPONSE_ERROR' }
-  | { type: 'IMAGE_GALLERY_SCRATCH_REINIT_LOCAL' }
   | { type: 'ISSUE_DETAILS_REQUEST', issueId: number }
   | { type: 'ISSUE_DETAILS_RESPONSE_OK', issueId: number, issueDetails: IssueDetailsData }
   | { type: 'ISSUE_DETAILS_RESPONSE_ERROR', issueId: number, error: Object }

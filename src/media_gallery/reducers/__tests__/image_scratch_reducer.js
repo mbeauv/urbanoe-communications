@@ -1,5 +1,5 @@
 // @flow
-import type { ImageScratchDetails } from 'urbanoe-model';
+import type { ImageScratchDetails } from '../../models/ImageScratchDetails';
 import type { MediaGalleryAction } from '../../actions/types';
 import { imageScratchReducer } from '../image_scratch_reducer';
 
