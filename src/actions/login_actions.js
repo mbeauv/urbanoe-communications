@@ -22,7 +22,7 @@ export function doLogin(
   password: string,
 ): ThunkAction {
   return async (dispatch) => {
-    dispatch({ type: 'LOGIN_REQUEST', userName, password });
+    dispatch({ type: 'LOGIN_REQUEST' });
 
     try {
       const response = await communicator().post('sessions.json', {

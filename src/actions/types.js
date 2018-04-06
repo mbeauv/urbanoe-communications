@@ -19,7 +19,7 @@ import type {
  * https://github.com/fbsamples/f8app/blob/master/js/actions/types.js
  */
 export type Action =
-    { type: 'LOGIN_REQUEST', userName: string, password: string }
+    { type: 'LOGIN_REQUEST' }
   | { type: 'LOGIN_RESPONSE_OK', login: LoginInfo }
   | { type: 'LOGOUT_REQUEST' }
   | { type: 'LOGOUT_RESPONSE_OK' }

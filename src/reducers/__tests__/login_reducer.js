@@ -1,14 +1,16 @@
+// @flow
+
 import { loginReducer } from '../login_reducer';
 
-const ERROR = 'an error';
+const ERROR = { message: 'an error' };
 const TOKEN = 'atoken';
-const USER_ID = 'auserid';
+const USER_ID = 12;
 const EMPTY_STATE = { loading: false, error: null, authInfo: null };
 const LOGGED_IN_STATE = {
   loading: false,
   error: null,
   authInfo: {
-    userName: 'aname',
+    authToken: 'atoken',
     endUserId: 12,
   },
 };

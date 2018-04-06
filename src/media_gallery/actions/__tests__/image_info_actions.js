@@ -5,7 +5,12 @@ import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { setCommunicatorInstance } from '../../../common';
-import { getImageInfos, deleteImageInfo } from '../image_info_actions';
+import {
+  getImageInfos,
+  createImageInfo,
+  deleteImageInfo,
+  updateImageInfo
+} from '../image_info_actions';
 
 const AUTH_TOKEN = 'blbla';
 const GALLERY1_ID = 43;
@@ -32,6 +37,40 @@ describe('image_info_actions', () => {
       const store = mockStore({ todos: [] });
 
       return store.dispatch(getImageInfos(AUTH_TOKEN, GALLERY1_ID)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+  });
+
+  describe('createImageInfo', () => {
+    it('handles successful update of an image info', () => {
+      mock.onPost(`/media_gallery/galleries/${GALLERY1_ID}/image_infos.json?auth_token=${AUTH_TOKEN}&use_scratch=true`).reply(200, {});
+
+      const expectedActions = [
+        { type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_REQUEST', galleryId: GALLERY1_ID },
+        { type: 'IMAGE_GALLERY_IMAGE_INFO_CREATE_RESPONSE_OK', galleryId: GALLERY1_ID, imageInfo: {} },
+      ];
+
+      const store = mockStore({ todos: [] });
+
+      return store.dispatch(createImageInfo(AUTH_TOKEN, GALLERY1_ID, IMAGE_INFO_ID1, 'newname', 'newdescription')).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+  });
+
+  describe('updateImageInfo', () => {
+    it('handles successful update of an image info', () => {
+      mock.onPut(`/media_gallery/galleries/${GALLERY1_ID}/image_infos/${IMAGE_INFO_ID1}.json?auth_token=${AUTH_TOKEN}&use_scratch=true`).reply(200, {});
+
+      const expectedActions = [
+        { type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_REQUEST', galleryId: GALLERY1_ID, imageInfoId: IMAGE_INFO_ID1 },
+        { type: 'IMAGE_GALLERY_IMAGE_INFO_UPDATE_RESPONSE_OK', galleryId: GALLERY1_ID, imageInfo: {} },
+      ];
+
+      const store = mockStore({ todos: [] });
+
+      return store.dispatch(updateImageInfo(AUTH_TOKEN, GALLERY1_ID, IMAGE_INFO_ID1, 'newname', 'newdescription')).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });

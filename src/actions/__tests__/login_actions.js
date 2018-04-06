@@ -42,7 +42,7 @@ describe('login_actions', () => {
         .reply(200, { auth_token: TOKEN, end_user_id: USER_ID });
 
       const expectedActions = [
-        { type: 'LOGIN_REQUEST', userName: USER_NAME, password: USER_PASSWORD },
+        { type: 'LOGIN_REQUEST' },
         { type: 'LOGIN_RESPONSE_OK', login: { authToken: TOKEN, endUserId: USER_ID } },
       ];
 

@@ -4,9 +4,9 @@ import type { LoginInfo } from 'urbanoe-model';
 import type { Action } from '../actions/types';
 
 type State = {
-  loading: boolean,
-  authInfo: ?LoginInfo,
-  error: ?Object,
+  +loading: boolean,
+  +authInfo: ?LoginInfo,
+  +error: ?Object,
 };
 
 const INITIAL_STATE: State = {
