@@ -9,7 +9,7 @@ import {
   getImageInfos,
   createImageInfo,
   deleteImageInfo,
-  updateImageInfo
+  updateImageInfo,
 } from '../image_info_actions';
 
 const AUTH_TOKEN = 'blbla';
@@ -53,7 +53,7 @@ describe('image_info_actions', () => {
 
       const store = mockStore({ todos: [] });
 
-      return store.dispatch(createImageInfo(AUTH_TOKEN, GALLERY1_ID, IMAGE_INFO_ID1, 'newname', 'newdescription')).then(() => {
+      return store.dispatch(createImageInfo(AUTH_TOKEN, GALLERY1_ID, 'newname', 'newdescription')).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
