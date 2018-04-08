@@ -5,6 +5,8 @@ This project is **DEPRECATED**.  The logic found here was split in two different
 - [media-gallery-redux](https://github.com/mbeauv/media-gallery-redux): Defines the interface to the media_gallery engine.
 - [urbanoe-redux](https://github.com/mbeauv/urbanoe-redux): Defines the interface to the urbanoe server.
 
+------------
+
 Module defining Redux actions and reducers to interact with the urbanoe server.  The interfaces are defined using Flow and all of the types can be found in the urbanoe-model module.  This module is usable both in React and React Native.
 
 
