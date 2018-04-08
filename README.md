@@ -1,6 +1,6 @@
 # urbanoe-communications
 
-This project is DEPRECATED.  The logic found here was split in two different projects:
+This project is **DEPRECATED**.  The logic found here was split in two different projects:
 
 - [media-gallery-redux](https://github.com/mbeauv/media-gallery-redux): Defines the interface to the media_gallery engine.
 - [urbanoe-redux](https://github.com/mbeauv/urbanoe-redux): Defines the interface to the urbanoe server.
